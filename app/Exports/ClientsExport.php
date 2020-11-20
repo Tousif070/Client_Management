@@ -12,8 +12,18 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ClientsExport implements FromCollection, ShouldAutoSize, WithMapping, WithHeadings, WithStyles
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+
+class ClientsExport implements FromCollection, ShouldAutoSize, WithMapping, WithHeadings, WithStyles, WithColumnFormatting
 {
+    public $serial;
+
+    public function __construct()
+    {
+        $this->serial = 0;
+    }
+
     public function collection()
     {
         $clients = Client::with(['source', 'person', 'service', 'leadstatus'])->get();
@@ -23,8 +33,10 @@ class ClientsExport implements FromCollection, ShouldAutoSize, WithMapping, With
 
     public function map($client): array
     {
+        $this->serial++;
+
         return [
-            $client->id,
+            $this->serial,
             $client->name,
             $client->company_name,
             $client->conversion_date,
@@ -43,7 +55,7 @@ class ClientsExport implements FromCollection, ShouldAutoSize, WithMapping, With
     public function headings(): array
     {
         return [
-            'ID',
+            'SL No.',
             'Client Name',
             'Company Name',
             'Conversion Date',
@@ -68,6 +80,13 @@ class ClientsExport implements FromCollection, ShouldAutoSize, WithMapping, With
                 'italic' => true,
                 'size' => 16
             ]],
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'D' => NumberFormat::FORMAT_DATE_YYYYMMDD
         ];
     }
 }
