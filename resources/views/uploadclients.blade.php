@@ -13,6 +13,12 @@
 
     <h3>Upload Excel File</h3>
 
+    @if(session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
+
     <form method="POST" enctype="multipart/form-data" action="{{ route('clients.import') }}">
 
         @csrf

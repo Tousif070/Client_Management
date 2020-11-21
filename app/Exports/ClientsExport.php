@@ -55,7 +55,7 @@ class ClientsExport implements FromCollection, ShouldAutoSize, WithMapping, With
     public function headings(): array
     {
         return [
-            'SL No.',
+            'Sl. No.',
             'Client Name',
             'Company Name',
             'Conversion Date',
