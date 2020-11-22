@@ -36,12 +36,20 @@ Route::post('/clients/import', 'ClientController@import')->name('clients.import'
 
 Route::get('/sources', 'SourceController@index')->name('sources');
 
+Route::get('/add/source', 'SourceController@addSourceView')->name('add.source');
+
+Route::post('/add/source', 'SourceController@addSource')->name('add.source.submit');
+
 
 
 
 // FOR SERVICE
 
 Route::get('/services', 'ServiceController@index')->name('services');
+
+Route::get('/add/service', 'ServiceController@addServiceView')->name('add.service');
+
+Route::post('/add/service', 'ServiceController@addService')->name('add.service.submit');
 
 
 
@@ -50,9 +58,17 @@ Route::get('/services', 'ServiceController@index')->name('services');
 
 Route::get('/persons', 'PersonController@index')->name('persons');
 
+Route::get('/add/person', 'PersonController@addPersonView')->name('add.person');
+
+Route::post('/add/person', 'PersonController@addPerson')->name('add.person.submit');
+
 
 
 
 // FOR LEAD STATUS
 
 Route::get('/leadstatuses', 'LeadStatusController@index')->name('leadstatuses');
+
+Route::get('/add/leadstatus', 'LeadStatusController@addLeadStatusView')->name('add.leadstatus');
+
+Route::post('/add/leadstatus', 'LeadStatusController@addLeadStatus')->name('add.leadstatus.submit');

@@ -13,4 +13,20 @@ class SourceController extends Controller
 
         return view('sources', ['sources' => $sources, 'serial' => 0]);
     }
+
+    public function addSourceView()
+    {
+        return view('addsource');
+    }
+
+    public function addSource(Request $request)
+    {
+        $source = new Source;
+
+        $source->name = $request->name;
+
+        $source->save();
+
+        return redirect()->back();
+    }
 }

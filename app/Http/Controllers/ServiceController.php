@@ -13,4 +13,20 @@ class ServiceController extends Controller
 
         return view('services', ['services' => $services, 'serial' => 0]);
     }
+
+    public function addServiceView()
+    {
+        return view('addservice');
+    }
+
+    public function addService(Request $request)
+    {
+        $service = new Service;
+
+        $service->name = $request->name;
+
+        $service->save();
+
+        return redirect()->back();
+    }
 }
