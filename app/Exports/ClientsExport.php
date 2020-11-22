@@ -4,7 +4,8 @@ namespace App\Exports;
 
 use App\Client;
 
-use Maatwebsite\Excel\Concerns\FromCollection;
+//use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -15,7 +16,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class ClientsExport implements FromCollection, ShouldAutoSize, WithMapping, WithHeadings, WithStyles, WithColumnFormatting
+class ClientsExport implements FromQuery, ShouldAutoSize, WithMapping, WithHeadings, WithStyles, WithColumnFormatting
 {
     public $serial;
 
@@ -24,9 +25,9 @@ class ClientsExport implements FromCollection, ShouldAutoSize, WithMapping, With
         $this->serial = 0;
     }
 
-    public function collection()
+    public function query()
     {
-        $clients = Client::with(['source', 'person', 'service', 'leadstatus'])->get();
+        $clients = Client::query()->with(['source', 'person', 'service', 'leadstatus']);
 
         return $clients;
     }

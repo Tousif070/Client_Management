@@ -6,8 +6,9 @@ use App\{Client, Source, Service, Person, LeadStatus};
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class ClientsImport implements ToCollection, WithHeadingRow
+class ClientsImport implements ToCollection, WithHeadingRow, WithChunkReading
 {
     public $sources, $services, $persons, $leadStatuses;
 
@@ -72,5 +73,10 @@ class ClientsImport implements ToCollection, WithHeadingRow
 
             $client->save();
         }
+    }
+
+    public function chunkSize(): int
+    {
+        return 100;
     }
 }
