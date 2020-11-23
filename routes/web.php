@@ -22,12 +22,16 @@ Route::get('/', function () {
 
 Route::get('/clients', 'ClientController@index')->name('clients');
 
-Route::get('/clients/export', 'ClientController@export')->name('clients.export');
+Route::get('/add/client', 'ClientController@addClientView')->name('add.client');
+
+Route::post('/add/client', 'ClientController@addClient')->name('add.client.submit');
 
 
 Route::get('/clients/upload', 'ClientController@uploadClients')->name('upload.clients');
 
 Route::post('/clients/import', 'ClientController@import')->name('clients.import');
+
+Route::get('/clients/export', 'ClientController@export')->name('clients.export');
 
 
 
