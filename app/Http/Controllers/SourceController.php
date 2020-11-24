@@ -29,4 +29,13 @@ class SourceController extends Controller
 
         return redirect()->back();
     }
+
+    public function removeSource($source_id)
+    {
+        $source = Source::find($source_id);
+
+        $source->delete();
+
+        return redirect()->back();
+    }
 }

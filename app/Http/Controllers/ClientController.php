@@ -52,6 +52,15 @@ class ClientController extends Controller
         return redirect()->back();
     }
 
+    public function removeClient($client_id)
+    {
+        $client = Client::find($client_id);
+
+        $client->delete();
+
+        return redirect()->back();
+    }
+
 
 
 

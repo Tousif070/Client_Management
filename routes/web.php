@@ -22,9 +22,11 @@ Route::get('/', function () {
 
 Route::get('/clients', 'ClientController@index')->name('clients');
 
-Route::get('/add/client', 'ClientController@addClientView')->name('add.client');
+Route::get('/client/add', 'ClientController@addClientView')->name('add.client');
 
-Route::post('/add/client', 'ClientController@addClient')->name('add.client.submit');
+Route::post('/client/add', 'ClientController@addClient')->name('add.client.submit');
+
+Route::post('/client/remove/{client_id}', 'ClientController@removeClient')->name('remove.client');
 
 
 Route::get('/clients/upload', 'ClientController@uploadClients')->name('upload.clients');
@@ -40,9 +42,11 @@ Route::get('/clients/export', 'ClientController@export')->name('clients.export')
 
 Route::get('/sources', 'SourceController@index')->name('sources');
 
-Route::get('/add/source', 'SourceController@addSourceView')->name('add.source');
+Route::get('/source/add', 'SourceController@addSourceView')->name('add.source');
 
-Route::post('/add/source', 'SourceController@addSource')->name('add.source.submit');
+Route::post('/source/add', 'SourceController@addSource')->name('add.source.submit');
+
+Route::post('/source/remove/{source_id}', 'SourceController@removeSource')->name('remove.source');
 
 
 
@@ -51,9 +55,11 @@ Route::post('/add/source', 'SourceController@addSource')->name('add.source.submi
 
 Route::get('/services', 'ServiceController@index')->name('services');
 
-Route::get('/add/service', 'ServiceController@addServiceView')->name('add.service');
+Route::get('/service/add', 'ServiceController@addServiceView')->name('add.service');
 
-Route::post('/add/service', 'ServiceController@addService')->name('add.service.submit');
+Route::post('/service/add', 'ServiceController@addService')->name('add.service.submit');
+
+Route::post('/service/remove/{service_id}', 'ServiceController@removeService')->name('remove.service');
 
 
 
@@ -62,9 +68,11 @@ Route::post('/add/service', 'ServiceController@addService')->name('add.service.s
 
 Route::get('/persons', 'PersonController@index')->name('persons');
 
-Route::get('/add/person', 'PersonController@addPersonView')->name('add.person');
+Route::get('/person/add', 'PersonController@addPersonView')->name('add.person');
 
-Route::post('/add/person', 'PersonController@addPerson')->name('add.person.submit');
+Route::post('/person/add', 'PersonController@addPerson')->name('add.person.submit');
+
+Route::post('/person/remove/{person_id}', 'PersonController@removePerson')->name('remove.person');
 
 
 
@@ -73,6 +81,8 @@ Route::post('/add/person', 'PersonController@addPerson')->name('add.person.submi
 
 Route::get('/leadstatuses', 'LeadStatusController@index')->name('leadstatuses');
 
-Route::get('/add/leadstatus', 'LeadStatusController@addLeadStatusView')->name('add.leadstatus');
+Route::get('/leadstatus/add', 'LeadStatusController@addLeadStatusView')->name('add.leadstatus');
 
-Route::post('/add/leadstatus', 'LeadStatusController@addLeadStatus')->name('add.leadstatus.submit');
+Route::post('/leadstatus/add', 'LeadStatusController@addLeadStatus')->name('add.leadstatus.submit');
+
+Route::post('/leadstatus/remove/{lead_status_id}', 'LeadStatusController@removeLeadStatus')->name('remove.leadstatus');

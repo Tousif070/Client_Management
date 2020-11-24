@@ -17,14 +17,15 @@
 
             <h3>Office Members</h3>
 
-            <table class="table">
+            <table class="table table-bordered table-hover">
         
-                <thead>
+                <thead class="thead-dark">
         
                     <tr>
                         <th>Sl. No.</th>
                         <th>ID</th>
                         <th>Name</th>
+                        <th></th>
                     </tr>
         
                 </thead>
@@ -37,6 +38,19 @@
                             <td>{{ ++$serial }}</td>
                             <td>{{ $person->id }}</td>
                             <td>{{ $person->name }}</td>
+
+                            <td>
+
+                                <form method="POST" action="{{ route('remove.person', $person->id) }}">
+
+                                    @csrf
+
+                                    <input type="submit" value="Remove" class="btn btn-danger" style="font-size: 12px">
+
+                                </form>
+
+                            </td>
+
                         </tr>
         
                     @endforeach

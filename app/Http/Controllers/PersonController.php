@@ -29,4 +29,13 @@ class PersonController extends Controller
 
         return redirect()->back();
     }
+
+    public function removePerson($person_id)
+    {
+        $person = Person::find($person_id);
+
+        $person->delete();
+
+        return redirect()->back();
+    }
 }

@@ -29,4 +29,13 @@ class ServiceController extends Controller
 
         return redirect()->back();
     }
+
+    public function removeService($service_id)
+    {
+        $service = Service::find($service_id);
+
+        $service->delete();
+
+        return redirect()->back();
+    }
 }

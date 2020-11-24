@@ -24,9 +24,9 @@
 
             <h3>Clients</h3>
 
-            <table class="table">
+            <table class="table table-bordered table-hover table-sm">
         
-                <thead>
+                <thead class="thead-dark">
         
                     <tr>
                         <th>Sl. No.</th>
@@ -43,6 +43,7 @@
                         <th>Lead Status</th>
                         <th>Comment-1</th>
                         <th>Comment-2</th>
+                        <th></th>
                     </tr>
         
                 </thead>
@@ -66,6 +67,19 @@
                             <td>{{ $client->leadstatus->name }}</td>
                             <td>{{ $client->comment_1 }}</td>
                             <td>{{ $client->comment_2 }}</td>
+
+                            <td>
+
+                                <form method="POST" action="{{ route('remove.client', $client->id) }}">
+
+                                    @csrf
+
+                                    <input type="submit" value="Remove" class="btn btn-danger" style="font-size: 12px">
+
+                                </form>
+
+                            </td>
+
                         </tr>
         
                     @endforeach

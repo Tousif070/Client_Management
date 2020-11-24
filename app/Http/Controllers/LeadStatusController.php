@@ -29,4 +29,13 @@ class LeadStatusController extends Controller
 
         return redirect()->back();
     }
+
+    public function removeLeadStatus($lead_status_id)
+    {
+        $leadStatus = LeadStatus::find($lead_status_id);
+
+        $leadStatus->delete();
+
+        return redirect()->back();
+    }
 }
