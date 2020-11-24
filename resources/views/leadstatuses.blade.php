@@ -41,7 +41,7 @@
 
                             <td>
 
-                                <form method="POST" action="{{ route('remove.leadstatus', $leadStatus->id) }}">
+                                <form method="POST" action="{{ route('leadstatus.remove', $leadStatus->id) }}">
 
                                     @csrf
 

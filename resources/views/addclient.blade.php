@@ -23,7 +23,7 @@
 
             {{-- FORM STARTS HERE --}}
 
-            <form method="POST" action="{{ route('add.client.submit') }}">
+            <form method="POST" action="{{ route('client.add.submit') }}">
 
                 @csrf
 

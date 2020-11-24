@@ -70,7 +70,7 @@
 
                             <td>
 
-                                <form method="POST" action="{{ route('remove.client', $client->id) }}">
+                                <form method="POST" action="{{ route('client.remove', $client->id) }}">
 
                                     @csrf
 

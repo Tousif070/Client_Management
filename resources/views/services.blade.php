@@ -41,7 +41,7 @@
 
                             <td>
 
-                                <form method="POST" action="{{ route('remove.service', $service->id) }}">
+                                <form method="POST" action="{{ route('service.remove', $service->id) }}">
 
                                     @csrf
 

@@ -21,7 +21,7 @@
 
         <div class="row">
 
-            <form method="POST" action="{{ route('add.service.submit') }}">
+            <form method="POST" action="{{ route('service.add.submit') }}">
 
                 @csrf
 
