@@ -14,7 +14,14 @@ class ClientController extends Controller
     {
         $clients = Client::with(['source', 'service', 'person', 'leadstatus'])->get();
 
-        return view('clients', ['clients' => $clients, 'serial' => 0]);
+        return view('clients', [
+            'clients' => $clients,
+            'serial' => 0,
+            'sources' => Source::all(),
+            'services' => Service::all(),
+            'persons' => Person::all(),
+            'leadStatuses' => LeadStatus::all()
+        ]);
     }
 
     public function addClientView()
@@ -59,6 +66,31 @@ class ClientController extends Controller
         $client->delete();
 
         return redirect()->back();
+    }
+
+    public function editClient(Request $request)
+    {
+        $client = Client::find($request->id);
+
+        $client->name = $request->client_name;
+        $client->company_name = $request->company_name;
+        $client->conversion_date = $request->conversion_date;
+
+        $client->contact_number = $request->contact_number;
+        $client->email = $request->email;    
+        $client->address = $request->address;
+
+        $client->comment_1 = $request->comment_1;
+        $client->comment_2 = $request->comment_2;
+
+        $client->source_id = $request->source_id;
+        $client->service_id = $request->service_id;
+        $client->person_id = $request->assigned_person_id;
+        $client->lead_status_id = $request->lead_status_id;
+
+        $client->save();
+
+        return "Updated Successfully !";
     }
 
 
