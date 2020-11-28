@@ -1,5 +1,7 @@
 @extends('layouts.baselayout')
 
+@section('title', 'Services')
+
 @section('content')
 
     <div class="container">

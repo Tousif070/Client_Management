@@ -1,5 +1,7 @@
 @extends('layouts.baselayout')
 
+@section('title', 'Upload Excel File')
+
 @section('content')
 
     <div class="container">

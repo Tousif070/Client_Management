@@ -1,5 +1,7 @@
 @extends('layouts.baselayout')
 
+@section('title', 'Add New Member')
+
 @section('content')
 
     <div class="container">

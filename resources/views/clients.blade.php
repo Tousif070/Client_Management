@@ -1,5 +1,7 @@
 @extends('layouts.clientslayout')
 
+@section('title', 'Clients')
+
 @section('content')
 
     <div class="container-fluid">

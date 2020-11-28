@@ -1,5 +1,7 @@
 @extends('layouts.baselayout')
 
+@section('title', 'Lead Statuses')
+
 @section('content')
 
     <div class="container">
