@@ -1,32 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+@extends('layouts.baselayout')
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+@section('content')
 
-    <title>Document</title>
-</head>
-<body>
+    <div class="container">
 
-    <h3>Upload Excel File</h3>
+        <div class="row">
 
-    @if(session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
+            <h3 class="mb-4">Upload Excel File</h3>
+
+            @if(session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+
         </div>
-    @endif
 
-    <form method="POST" enctype="multipart/form-data" action="{{ route('clients.import') }}">
+        <div class="row">
 
-        @csrf
+            <form method="POST" enctype="multipart/form-data" action="{{ route('clients.import') }}">
 
-        <input type="file" name="my_file">
-        <input type="submit" value="Upload" class="btn btn-primary">
+                @csrf
 
-    </form>
+                <input type="file" name="my_file">
+                
+                <input type="submit" value="Upload" class="btn btn-primary">
 
-</body>
-</html>
+            </form>
+
+        </div>
+
+    </div>
+
+@endsection
