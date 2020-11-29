@@ -21,13 +21,20 @@ class LeadStatusController extends Controller
 
     public function addLeadStatus(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required | min:3'
+        ], [
+            'name.required' => 'Please enter a name.',
+            'name.min' => 'Name must contain at least 3 characters.'
+        ]);
+
         $leadStatus = new LeadStatus;
 
         $leadStatus->name = $request->name;
 
         $leadStatus->save();
 
-        return redirect()->back();
+        return redirect()->back()->withStatus('Lead Status Added Successfully !');
     }
 
     public function removeLeadStatus($lead_status_id)

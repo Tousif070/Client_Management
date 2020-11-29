@@ -21,13 +21,20 @@ class PersonController extends Controller
 
     public function addPerson(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required | min:3'
+        ], [
+            'name.required' => 'Please enter a name.',
+            'name.min' => 'Name must contain at least 3 characters.'
+        ]);
+
         $person = new Person;
 
         $person->name = $request->name;
 
         $person->save();
 
-        return redirect()->back();
+        return redirect()->back()->withStatus('Office Member Added Successfully !');
     }
 
     public function removePerson($person_id)

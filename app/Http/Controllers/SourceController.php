@@ -21,13 +21,20 @@ class SourceController extends Controller
 
     public function addSource(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required | min:3'
+        ], [
+            'name.required' => 'Please enter a name.',
+            'name.min' => 'Name must contain at least 3 characters.'
+        ]);
+
         $source = new Source;
 
         $source->name = $request->name;
 
         $source->save();
 
-        return redirect()->back();
+        return redirect()->back()->withStatus('Source Added Successfully !');
     }
 
     public function removeSource($source_id)

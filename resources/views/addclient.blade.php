@@ -14,9 +14,23 @@
 
         <div class="row">
 
+            @if(session('status'))
+
+                <div class="alert alert-success" role="alert">
+
+                    {{ session('status') }}
+
+                </div>
+                
+            @endif
+
+        </div>
+
+        <div class="row">
+
             {{-- FORM STARTS HERE --}}
 
-            <form method="POST" action="{{ route('client.add.submit') }}">
+            <form class method="POST" action="{{ route('client.add.submit') }}">
 
                 @csrf
 
@@ -24,7 +38,9 @@
 
                     <label>Client Name:</label>
 
-                    <input type="text" name="client_name" class="form-control">
+                    <input type="text" name="client_name" value="{{ old('client_name') }}" class="form-control">
+
+                    <div class="text-danger">{{ $errors->first('client_name') }}</div>
 
                 </div>
 
@@ -32,7 +48,9 @@
 
                     <label>Company Name:</label>
 
-                    <input type="text" name="company_name" class="form-control">
+                    <input type="text" name="company_name" value="{{ old('company_name') }}" class="form-control">
+
+                    <div class="text-danger">{{ $errors->first('company_name') }}</div>
 
                 </div>
 
@@ -40,7 +58,9 @@
 
                     <label>Conversion Date:</label>
 
-                    <input type="text" name="conversion_date" class="form-control">
+                    <input type="text" name="conversion_date" value="{{ old('conversion_date') }}" class="form-control">
+
+                    <div class="text-danger">{{ $errors->first('conversion_date') }}</div>
 
                 </div>
 
@@ -54,11 +74,13 @@
 
                         @foreach($sources as $source)
 
-                        <option value="{{ $source->id }}">{{ $source->name }}</option>
+                        <option value="{{ $source->id }}" {{ old('source_id') == $source->id ? "selected" : "" }}>{{ $source->name }}</option>
 
                         @endforeach
 
                     </select>
+
+                    <div class="text-danger">{{ $errors->first('source_id') }}</div>
 
                 </div>
 
@@ -72,11 +94,13 @@
 
                         @foreach($persons as $person)
 
-                        <option value="{{ $person->id }}">{{ $person->name }}</option>
+                        <option value="{{ $person->id }}" {{ old('assigned_person_id') == $person->id ? "selected" : "" }}>{{ $person->name }}</option>
 
                         @endforeach
 
                     </select>
+
+                    <div class="text-danger">{{ $errors->first('assigned_person_id') }}</div>
 
                 </div>
 
@@ -90,19 +114,23 @@
 
                         @foreach($services as $service)
 
-                        <option value="{{ $service->id }}">{{ $service->name }}</option>
+                        <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? "selected" : "" }}>{{ $service->name }}</option>
 
                         @endforeach
 
                     </select>
 
+                    <div class="text-danger">{{ $errors->first('service_id') }}</div>
+
                 </div>
 
                 <div class="form-group">
 
-                    <label>Contact Number:</label>
+                    <label>Phone Number (Mobile):</label>
 
-                    <input type="text" name="contact_number" class="form-control">
+                    <input type="text" name="contact_number" value="{{ old('contact_number') }}" class="form-control">
+
+                    <div class="text-danger">{{ $errors->first('contact_number') }}</div>
 
                 </div>
 
@@ -110,7 +138,9 @@
 
                     <label>Email:</label>
 
-                    <input type="email" name="email" class="form-control">
+                    <input type="text" name="email" value="{{ old('email') }}" class="form-control">
+
+                    <div class="text-danger">{{ $errors->first('email') }}</div>
 
                 </div>
 
@@ -118,7 +148,9 @@
 
                     <label>Address:</label>
 
-                    <textarea name="address" class="form-control" rows="3"></textarea>
+                    <textarea name="address" class="form-control" rows="3">{{ old('address') }}</textarea>
+
+                    <div class="text-danger">{{ $errors->first('address') }}</div>
 
                 </div>
 
@@ -132,11 +164,13 @@
 
                         @foreach($leadStatuses as $leadStatus)
 
-                        <option value="{{ $leadStatus->id }}">{{ $leadStatus->name }}</option>
+                        <option value="{{ $leadStatus->id }}" {{ old('lead_status_id') == $leadStatus->id ? "selected" : "" }}>{{ $leadStatus->name }}</option>
 
                         @endforeach
 
                     </select>
+
+                    <div class="text-danger">{{ $errors->first('lead_status_id') }}</div>
 
                 </div>
 
@@ -144,7 +178,9 @@
 
                     <label>Comment-1:</label>
 
-                    <textarea name="comment_1" class="form-control" rows="3"></textarea>
+                    <textarea name="comment_1" class="form-control" rows="3">{{ old('comment_1') }}</textarea>
+
+                    <div class="text-danger">{{ $errors->first('comment_1') }}</div>
 
                 </div>
 
@@ -152,7 +188,9 @@
 
                     <label>Comment-2:</label>
 
-                    <textarea name="comment_2" class="form-control" rows="3"></textarea>
+                    <textarea name="comment_2" class="form-control" rows="3">{{ old('comment_2') }}</textarea>
+
+                    <div class="text-danger">{{ $errors->first('comment_2') }}</div>
 
                 </div>
 

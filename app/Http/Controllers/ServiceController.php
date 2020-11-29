@@ -21,13 +21,20 @@ class ServiceController extends Controller
 
     public function addService(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required | min:3'
+        ], [
+            'name.required' => 'Please enter a name.',
+            'name.min' => 'Name must contain at least 3 characters.'
+        ]);
+
         $service = new Service;
 
         $service->name = $request->name;
 
         $service->save();
 
-        return redirect()->back();
+        return redirect()->back()->withStatus('Service Added Successfully !');
     }
 
     public function removeService($service_id)

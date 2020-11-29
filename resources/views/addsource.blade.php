@@ -14,6 +14,20 @@
 
         <div class="row">
 
+            @if(session('status'))
+
+                <div class="alert alert-success" role="alert">
+
+                    {{ session('status') }}
+
+                </div>
+                
+            @endif
+
+        </div>
+
+        <div class="row">
+
             <form method="POST" action="{{ route('source.add.submit') }}">
 
                 @csrf
@@ -23,6 +37,8 @@
                     <label>Name:</label>
 
                     <input type="text" name="name" class="form-control">
+
+                    <div class="text-danger">{{ $errors->first('name') }}</div>
 
                 </div>
 

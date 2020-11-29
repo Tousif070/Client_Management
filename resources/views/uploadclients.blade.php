@@ -10,10 +10,18 @@
 
             <h3 class="mb-4">Upload Excel File</h3>
 
+        </div>
+
+        <div class="row">
+
             @if(session('status'))
+
                 <div class="alert alert-success" role="alert">
+
                     {{ session('status') }}
+
                 </div>
+                
             @endif
 
         </div>

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ClientFormRequest;
+
 use App\{Client, Source, Service, Person, LeadStatus};
+
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ClientsExport;
 use App\Imports\ClientsImport;
@@ -34,7 +37,7 @@ class ClientController extends Controller
         ]);
     }
 
-    public function addClient(Request $request)
+    public function addClient(ClientFormRequest $request)
     {
         $client = new Client;
 
@@ -56,7 +59,7 @@ class ClientController extends Controller
         
         $client->save();
 
-        return redirect()->back();
+        return redirect()->back()->withStatus('Client Added Successfully !');
     }
 
     public function removeClient($client_id)
