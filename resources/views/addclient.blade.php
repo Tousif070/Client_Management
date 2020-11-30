@@ -16,12 +16,12 @@
 
             @if(session('status'))
 
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success col-sm-8" role="alert">
 
                     {{ session('status') }}
 
                 </div>
-                
+
             @endif
 
         </div>
@@ -30,7 +30,7 @@
 
             {{-- FORM STARTS HERE --}}
 
-            <form class method="POST" action="{{ route('client.add.submit') }}">
+            <form class="col-sm-8" method="POST" action="{{ route('client.add.submit') }}">
 
                 @csrf
 

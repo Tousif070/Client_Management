@@ -19,7 +19,7 @@ class ClientFormRequest extends FormRequest
             'conversion_date' => 'required | date | date_format:Y-m-d',
 
             'contact_number' => 'required | numeric',
-            'email' => 'email | alpha_num | nullable',
+            'email' => 'email | nullable',
             'address' => 'nullable | min:5',
 
             'comment_1' => 'nullable | min:3',

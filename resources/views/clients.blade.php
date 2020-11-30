@@ -11,9 +11,9 @@
             <h3 class="ml-3">Clients</h3>
 
             <table class="table table-bordered table-sm ml-3">
-        
+
                 <thead class="thead-dark">
-        
+
                     <tr>
                         <th>Sl. No.</th>
                         <th>Client Name</th>
@@ -31,13 +31,13 @@
                         <th></th>
                         <th></th>
                     </tr>
-        
+
                 </thead>
-        
+
                 <tbody>
-    
+
                     @foreach($clients as $client)
-        
+
                         <tr>
 
                             <td>{{ ++$serial }}</td>
@@ -153,10 +153,10 @@
                             </td>
 
 
-                            
+
 
                             <td><button id="{{ $client->id }}" onclick="change(this.id)" class="btn btn-info" style="font-size: 14px">Edit</button></td>
-                            
+
 
                             <td>
 
@@ -171,11 +171,11 @@
                             </td>
 
                         </tr>
-        
+
                     @endforeach
-        
+
                 </tbody>
-        
+
             </table>
 
         </div>
