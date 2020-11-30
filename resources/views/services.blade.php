@@ -11,43 +11,64 @@
             <h3>Services</h3>
 
             <table class="table table-bordered table-hover">
-        
+
                 <thead class="thead-dark">
-        
+
                     <tr>
                         <th>Sl. No.</th>
                         <th>Name</th>
                         <th></th>
                     </tr>
-        
+
                 </thead>
-        
+
                 <tbody>
-    
+
                     @foreach($services as $service)
-        
+
                         <tr>
                             <td>{{ ++$serial }}</td>
                             <td>{{ $service->name }}</td>
 
                             <td>
 
-                                <form method="POST" action="{{ route('service.remove', $service->id) }}">
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#service{{ $service->id }}" style="font-size: 12px;">Remove</button>
 
-                                    @csrf
+                                <div class="modal fade" id="service{{ $service->id }}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Remove Service</h5>
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span>&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure ?</p>
+                                            </div>
+                                            <div class="modal-footer">
 
-                                    <input type="submit" value="Remove" class="btn btn-danger" style="font-size: 12px">
+                                                <form method="POST" action="{{ route('service.remove', $service->id) }}">
 
-                                </form>
+                                                    @csrf
+
+                                                    <input type="submit" class="btn btn-primary" value="Yes">
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </td>
 
                         </tr>
-        
+
                     @endforeach
-        
+
                 </tbody>
-        
+
             </table>
 
         </div>

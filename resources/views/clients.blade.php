@@ -158,15 +158,38 @@
                             <td><button id="{{ $client->id }}" onclick="change(this.id)" class="btn btn-info" style="font-size: 14px">Edit</button></td>
 
 
+
+
                             <td>
 
-                                <form method="POST" action="{{ route('client.remove', $client->id) }}">
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#client{{ $client->id }}" style="font-size: 14px;">Remove</button>
 
-                                    @csrf
+                                <div class="modal fade" id="client{{ $client->id }}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Remove Client</h5>
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span>&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure ?</p>
+                                            </div>
+                                            <div class="modal-footer">
 
-                                    <input type="submit" value="Remove" class="btn btn-danger" style="font-size: 14px">
+                                                <form method="POST" action="{{ route('client.remove', $client->id) }}">
 
-                                </form>
+                                                    @csrf
+
+                                                    <input type="submit" class="btn btn-primary" value="Yes">
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </td>
 
