@@ -45,4 +45,29 @@ class LeadStatusController extends Controller
 
         return redirect()->back();
     }
+
+    public function editLeadStatusView($lead_status_id)
+    {
+        $leadStatus = LeadStatus::find($lead_status_id);
+
+        return view('editleadstatus', compact('leadStatus'));
+    }
+
+    public function editLeadStatus(Request $request, $lead_status_id)
+    {
+        $this->validate($request, [
+            'name' => 'required | min:3'
+        ], [
+            'name.required' => 'Name can not be empty.',
+            'name.min' => 'Name must contain at least 3 characters.'
+        ]);
+
+        $leadStatus = LeadStatus::find($lead_status_id);
+
+        $leadStatus->name = $request->name;
+
+        $leadStatus->save();
+
+        return redirect()->back()->withStatus('Lead Status Updated Successfully !');
+    }
 }

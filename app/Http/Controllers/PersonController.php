@@ -45,4 +45,29 @@ class PersonController extends Controller
 
         return redirect()->back();
     }
+
+    public function editPersonView($person_id)
+    {
+        $person = Person::find($person_id);
+
+        return view('editperson', compact('person'));
+    }
+
+    public function editPerson(Request $request, $person_id)
+    {
+        $this->validate($request, [
+            'name' => 'required | min:3'
+        ], [
+            'name.required' => 'Name can not be empty.',
+            'name.min' => 'Name must contain at least 3 characters.'
+        ]);
+
+        $person = Person::find($person_id);
+
+        $person->name = $request->name;
+
+        $person->save();
+
+        return redirect()->back()->withStatus('Office Member Updated Successfully !');
+    }
 }

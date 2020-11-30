@@ -45,4 +45,29 @@ class ServiceController extends Controller
 
         return redirect()->back();
     }
+
+    public function editServiceView($service_id)
+    {
+        $service = Service::find($service_id);
+
+        return view('editservice', compact('service'));
+    }
+
+    public function editService(Request $request, $service_id)
+    {
+        $this->validate($request, [
+            'name' => 'required | min:3'
+        ], [
+            'name.required' => 'Name can not be empty.',
+            'name.min' => 'Name must contain at least 3 characters.'
+        ]);
+
+        $service = Service::find($service_id);
+
+        $service->name = $request->name;
+
+        $service->save();
+
+        return redirect()->back()->withStatus('Service Updated Successfully !');
+    }
 }

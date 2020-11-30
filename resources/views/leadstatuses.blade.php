@@ -32,6 +32,8 @@
 
                             <td>
 
+                                <a href="{{ route('leadstatus.edit', $leadStatus->id) }}" class="btn btn-info" style="font-size: 12px;">Edit</a>
+
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#leadStatus{{ $leadStatus->id }}" style="font-size: 12px;">Remove</button>
 
                                 <div class="modal fade" id="leadStatus{{ $leadStatus->id }}">

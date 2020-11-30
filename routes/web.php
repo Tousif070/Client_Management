@@ -37,6 +37,10 @@ Route::post('/source/add', 'SourceController@addSource')->name('source.add.submi
 
 Route::post('/source/remove/{source_id}', 'SourceController@removeSource')->name('source.remove');
 
+Route::get('/source/edit/{source_id}', 'SourceController@editSourceView')->name('source.edit');
+
+Route::post('/source/edit/{source_id}', 'SourceController@editSource')->name('source.edit.submit');
+
 
 
 
@@ -49,6 +53,10 @@ Route::get('/service/add', 'ServiceController@addServiceView')->name('service.ad
 Route::post('/service/add', 'ServiceController@addService')->name('service.add.submit');
 
 Route::post('/service/remove/{service_id}', 'ServiceController@removeService')->name('service.remove');
+
+Route::get('/service/edit/{service_id}', 'ServiceController@editServiceView')->name('service.edit');
+
+Route::post('/service/edit/{service_id}', 'ServiceController@editService')->name('service.edit.submit');
 
 
 
@@ -63,6 +71,10 @@ Route::post('/person/add', 'PersonController@addPerson')->name('person.add.submi
 
 Route::post('/person/remove/{person_id}', 'PersonController@removePerson')->name('person.remove');
 
+Route::get('/person/edit/{person_id}', 'PersonController@editPersonView')->name('person.edit');
+
+Route::post('/person/edit/{person_id}', 'PersonController@editPerson')->name('person.edit.submit');
+
 
 
 
@@ -75,3 +87,7 @@ Route::get('/leadstatus/add', 'LeadStatusController@addLeadStatusView')->name('l
 Route::post('/leadstatus/add', 'LeadStatusController@addLeadStatus')->name('leadstatus.add.submit');
 
 Route::post('/leadstatus/remove/{lead_status_id}', 'LeadStatusController@removeLeadStatus')->name('leadstatus.remove');
+
+Route::get('/leadstatus/edit/{lead_status_id}', 'LeadStatusController@editLeadStatusView')->name('leadstatus.edit');
+
+Route::post('/leadstatus/edit/{lead_status_id}', 'LeadStatusController@editLeadStatus')->name('leadstatus.edit.submit');

@@ -45,4 +45,29 @@ class SourceController extends Controller
 
         return redirect()->back();
     }
+
+    public function editSourceView($source_id)
+    {
+        $source = Source::find($source_id);
+
+        return view('editsource', compact('source'));
+    }
+
+    public function editSource(Request $request, $source_id)
+    {
+        $this->validate($request, [
+            'name' => 'required | min:3'
+        ], [
+            'name.required' => 'Name can not be empty.',
+            'name.min' => 'Name must contain at least 3 characters.'
+        ]);
+
+        $source = Source::find($source_id);
+
+        $source->name = $request->name;
+
+        $source->save();
+
+        return redirect()->back()->withStatus('Source Updated Successfully !');
+    }
 }
