@@ -106,6 +106,13 @@ class ClientController extends Controller
 
     public function import(Request $request)
     {
+        $this->validate($request, [
+            'my_file' => 'required | mimes:xls,xlsx'
+        ], [
+            'my_file.required' => 'Please choose a file to upload.',
+            'my_file.mimes' => 'File type must be of xlsx or xls.'
+        ]);
+
         $file = $request->my_file->store('excel_import');
 
         Excel::import(new ClientsImport, $file);

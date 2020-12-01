@@ -16,7 +16,7 @@
 
             @if(session('status'))
 
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success col-sm-8" role="alert">
 
                     {{ session('status') }}
 
@@ -28,11 +28,17 @@
 
         <div class="row">
 
-            <form method="POST" enctype="multipart/form-data" action="{{ route('clients.import') }}">
+            <form class="col-sm-8" method="POST" enctype="multipart/form-data" action="{{ route('clients.import') }}">
 
                 @csrf
 
-                <input type="file" name="my_file">
+                <div class="form-group">
+
+                    <input type="file" name="my_file">
+
+                    <div class="text-danger">{{ $errors->first('my_file') }}</div>
+
+                </div>
                 
                 <input type="submit" value="Upload" class="btn btn-primary">
 

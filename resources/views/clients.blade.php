@@ -8,7 +8,13 @@
 
         <div class="row">
 
-            <h3 class="ml-3">Clients</h3>
+            <h3 class="col-xl-10 mb-4">Clients</h3>
+
+            <div class="col-xl-2 mb-4">
+
+                <a href="{{ route('clients.export') }}" class="btn btn-success">Download Client Data</a>
+
+            </div>
 
             <table class="table table-bordered table-sm ml-3">
 

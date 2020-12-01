@@ -32,7 +32,7 @@
 
                             <td>
 
-                                <a href="{{ route('service.edit', $service->id) }}" class="btn btn-info" style="font-size: 12px;">Edit</a>
+                                <a href="{{ route('service.edit', $service->id) }}" class="btn btn-info mr-2" style="font-size: 12px;">Edit</a>
 
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#service{{ $service->id }}" style="font-size: 12px;">Remove</button>
 
