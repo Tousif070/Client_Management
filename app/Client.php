@@ -31,4 +31,9 @@ class Client extends Model
     {
         return $this->belongsTo('App\LeadStatus');
     }
+
+    public function meetings()
+    {
+        return $this->hasMany('App\Meeting');
+    }
 }

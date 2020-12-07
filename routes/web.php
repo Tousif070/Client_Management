@@ -91,3 +91,20 @@ Route::post('/leadstatus/remove/{lead_status_id}', 'LeadStatusController@removeL
 Route::get('/leadstatus/edit/{lead_status_id}', 'LeadStatusController@editLeadStatusView')->name('leadstatus.edit');
 
 Route::post('/leadstatus/edit/{lead_status_id}', 'LeadStatusController@editLeadStatus')->name('leadstatus.edit.submit');
+
+
+
+
+// FOR MEETING
+
+Route::get('/meetings', 'MeetingController@index')->name('meetings');
+
+Route::get('/meeting/add', 'MeetingController@addMeetingView')->name('meeting.add');
+
+Route::post('/meeting/add', 'MeetingController@addMeeting')->name('meeting.add.submit');
+
+Route::post('/meeting/remove/{meeting_id}', 'MeetingController@removeMeeting')->name('meeting.remove');
+
+Route::get('/meeting/edit/{meeting_id}', 'MeetingController@editMeetingView')->name('meeting.edit');
+
+Route::post('/meeting/edit/{meeting_id}', 'MeetingController@editMeeting')->name('meeting.edit.submit');

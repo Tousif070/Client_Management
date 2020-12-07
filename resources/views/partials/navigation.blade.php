@@ -30,6 +30,27 @@
         <li class="nav-item dropdown active">
 
             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Meeting
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                <a class="dropdown-item" href="{{ route('meetings') }}">Meeting List</a>
+
+                <a class="dropdown-item" href="{{ route('meeting.add') }}">Add Meeting</a>
+
+            </div>
+            
+        </li>
+
+    </ul>
+
+
+    <ul class="navbar-nav mr-4">
+
+        <li class="nav-item dropdown active">
+
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Service
             </a>
 
