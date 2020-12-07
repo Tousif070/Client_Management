@@ -52,7 +52,7 @@
 
                             <td><input class="{{ $client->id }}" type="text" disabled name="company_name" value="{{ $client->company_name }}"></td>
 
-                            <td><input class="{{ $client->id }}" type="text" disabled name="conversion_date" value="{{ $client->conversion_date }}"></td>
+                            <td><input class="{{ $client->id }}" type="date" disabled name="conversion_date" value="{{ $client->conversion_date }}"></td>
 
                             <td>
 

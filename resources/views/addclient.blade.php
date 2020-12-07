@@ -58,7 +58,7 @@
 
                     <label>Conversion Date:</label>
 
-                    <input type="text" name="conversion_date" value="{{ old('conversion_date') }}" class="form-control">
+                    <input type="date" name="conversion_date" value="{{ old('conversion_date') }}" class="form-control">
 
                     <div class="text-danger">{{ $errors->first('conversion_date') }}</div>
 

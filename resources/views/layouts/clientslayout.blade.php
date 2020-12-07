@@ -24,7 +24,7 @@
             background-color: white;
         }
 
-        input[type="text"], input[type="email"], select {
+        input[type="text"], input[type="date"]:disabled, input[type="email"], select {
             height: 35px;
             background-color: white;
         }
@@ -33,7 +33,7 @@
             background-color: white;
         }
 
-        input[type="text"]:disabled, input[type="email"]:disabled, select:disabled, textarea:disabled {
+        input[type="text"]:disabled, input[type="date"]:disabled, input[type="email"]:disabled, select:disabled, textarea:disabled {
             border: 0;
             font-weight: 500;
             opacity: 1.0;
