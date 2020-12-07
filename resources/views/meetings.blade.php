@@ -41,8 +41,8 @@
                             <td>{{ $meeting->client->person->name }}</td>
                             <td>{{ $meeting->client->service->name }}</td>
                             <td>{{ $meeting->client->leadStatus->name }}</td>
-                            <td>{{ $meeting->date }}</td>
-                            <td>{{ $meeting->time }}</td>
+                            <td>{{ date_format(date_create($meeting->date), 'M-d-Y') }}</td>
+                            <td>{{ date_format(date_create($meeting->time), 'h:i A') }}</td>
 
                             <td>
 

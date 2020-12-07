@@ -37,7 +37,7 @@
 
                 <a class="dropdown-item" href="{{ route('meetings') }}">Meeting List</a>
 
-                <a class="dropdown-item" href="{{ route('meeting.add') }}">Add Meeting</a>
+                <a class="dropdown-item" href="{{ route('meeting.add') }}">Create Meeting</a>
 
             </div>
             

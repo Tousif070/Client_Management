@@ -40,8 +40,8 @@ class ClientFormRequest extends FormRequest
 
             'company_name' => 'Company name must contain at least 3 characters.',
 
-            'conversion_date.required' => 'Please enter a date.',
-            'conversion_date.date' => 'Please enter a valid date.',
+            'conversion_date.required' => 'Please select a date.',
+            'conversion_date.date' => 'Please select a valid date.',
             'conversion_date.date_format' => 'Date must follow this format - yyyy-mm-dd.',
 
             'contact_number.required' => 'Please enter a phone number.',

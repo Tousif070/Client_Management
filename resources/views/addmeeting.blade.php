@@ -1,6 +1,6 @@
 @extends('layouts.baselayout')
 
-@section('title', 'Add New Meeting')
+@section('title', 'Create New Meeting')
 
 @section('content')
 
@@ -8,7 +8,7 @@
 
         <div class="row">
 
-            <h3 class="mb-4">Add New Meeting</h3>
+            <h3 class="mb-4">Create New Meeting</h3>
 
         </div>
 
@@ -56,151 +56,41 @@
 
                 <div class="form-group">
 
-                    <label>Company Name:</label>
+                    <label>Client:</label>
 
-                    <input type="text" name="company_name" value="{{ old('company_name') }}" class="form-control">
-
-                    <div class="text-danger">{{ $errors->first('company_name') }}</div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Conversion Date:</label>
-
-                    <input type="text" name="conversion_date" value="{{ old('conversion_date') }}" class="form-control">
-
-                    <div class="text-danger">{{ $errors->first('conversion_date') }}</div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Source:</label>
-
-                    <select class="form-control" name="source_id">
+                    <select class="form-control" name="client_id">
 
                         <option selected disabled>Select</option>
 
-                        @foreach($sources as $source)
+                        @foreach($clients as $client)
 
-                        <option value="{{ $source->id }}" {{ old('source_id') == $source->id ? "selected" : "" }}>{{ $source->name }}</option>
+                        <option value="{{ $client->id }}" {{ old('client_id') == $client->id ? "selected" : "" }}>{{ $client->name }}</option>
 
                         @endforeach
 
                     </select>
 
-                    <div class="text-danger">{{ $errors->first('source_id') }}</div>
+                    <div class="text-danger">{{ $errors->first('client_id') }}</div>
 
                 </div>
 
                 <div class="form-group">
 
-                    <label>Assigned Person:</label>
+                    <label>Date:</label>
 
-                    <select class="form-control" name="assigned_person_id">
+                    <input type="date" name="date" value="{{ old('date') }}" class="form-control">
 
-                        <option selected disabled>Select</option>
-
-                        @foreach($persons as $person)
-
-                        <option value="{{ $person->id }}" {{ old('assigned_person_id') == $person->id ? "selected" : "" }}>{{ $person->name }}</option>
-
-                        @endforeach
-
-                    </select>
-
-                    <div class="text-danger">{{ $errors->first('assigned_person_id') }}</div>
+                    <div class="text-danger">{{ $errors->first('date') }}</div>
 
                 </div>
 
                 <div class="form-group">
 
-                    <label>Service Requirement:</label>
+                    <label>Time:</label>
 
-                    <select class="form-control" name="service_id">
+                    <input type="time" name="time" value="{{ old('time') }}" class="form-control">
 
-                        <option selected disabled>Select</option>
-
-                        @foreach($services as $service)
-
-                        <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? "selected" : "" }}>{{ $service->name }}</option>
-
-                        @endforeach
-
-                    </select>
-
-                    <div class="text-danger">{{ $errors->first('service_id') }}</div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Phone Number (Mobile):</label>
-
-                    <input type="text" name="contact_number" value="{{ old('contact_number') }}" class="form-control">
-
-                    <div class="text-danger">{{ $errors->first('contact_number') }}</div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Email:</label>
-
-                    <input type="text" name="email" value="{{ old('email') }}" class="form-control">
-
-                    <div class="text-danger">{{ $errors->first('email') }}</div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Address:</label>
-
-                    <textarea name="address" class="form-control" rows="3">{{ old('address') }}</textarea>
-
-                    <div class="text-danger">{{ $errors->first('address') }}</div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Lead Status:</label>
-
-                    <select class="form-control" name="lead_status_id">
-
-                        <option selected disabled>Select</option>
-
-                        @foreach($leadStatuses as $leadStatus)
-
-                        <option value="{{ $leadStatus->id }}" {{ old('lead_status_id') == $leadStatus->id ? "selected" : "" }}>{{ $leadStatus->name }}</option>
-
-                        @endforeach
-
-                    </select>
-
-                    <div class="text-danger">{{ $errors->first('lead_status_id') }}</div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Comment-1:</label>
-
-                    <textarea name="comment_1" class="form-control" rows="3">{{ old('comment_1') }}</textarea>
-
-                    <div class="text-danger">{{ $errors->first('comment_1') }}</div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Comment-2:</label>
-
-                    <textarea name="comment_2" class="form-control" rows="3">{{ old('comment_2') }}</textarea>
-
-                    <div class="text-danger">{{ $errors->first('comment_2') }}</div>
+                    <div class="text-danger">{{ $errors->first('time') }}</div>
 
                 </div>
 
@@ -208,7 +98,7 @@
 
 
 
-                <input type="submit" value="Add" class="btn btn-primary">
+                <input type="submit" value="Create" class="btn btn-primary">
 
 
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Meeting;
+use App\Http\Requests\MeetingFormRequest;
+
+use App\{Meeting, Client};
 
 class MeetingController extends Controller
 {
@@ -16,6 +18,23 @@ class MeetingController extends Controller
 
     public function addMeetingView()
     {
-        return view('addmeeting');
+        $clients = Client::all();
+
+        return view('addmeeting', compact('clients'));
+    }
+
+    public function addMeeting(MeetingFormRequest $request)
+    {
+        $meeting = new Meeting;
+
+        $meeting->title = $request->title;
+        $meeting->agenda = $request->agenda;
+        $meeting->client_id = $request->client_id;
+        $meeting->date = $request->date;
+        $meeting->time = $request->time;
+
+        $meeting->save();
+
+        return redirect()->back()->withStatus('Meeting Created Successfully !');
     }
 }
