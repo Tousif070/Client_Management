@@ -37,4 +37,27 @@ class MeetingController extends Controller
 
         return redirect()->back()->withStatus('Meeting Created Successfully !');
     }
+
+    public function removeMeeting($meeting_id)
+    {
+        $meeting = Meeting::find($meeting_id);
+
+        $meeting->delete();
+
+        return redirect()->back();
+    }
+
+    public function editMeetingView($meeting_id)
+    {
+        $meeting = Meeting::with('client')->find($meeting_id);
+
+        return view('editmeeting', compact('meeting'));
+    }
+
+    public function editMeeting(Request $request, $meeting_id)
+    {
+        return "HAHAHAHAHA";
+
+        //return redirect()->back()->withStatus('Source Updated Successfully !');
+    }
 }
