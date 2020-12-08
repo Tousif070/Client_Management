@@ -62,6 +62,50 @@
 
                 <div class="form-group">
 
+                    <label>Assigned Person:</label>
+
+                    <select class="form-control" name="person_id">
+
+                        @foreach($persons as $person)
+
+                        <option value="{{ $person->id }}" {{ (old('person_id') ? (old('person_id') == $person->id ? "selected" : "") : ($person->id == $meeting->client->person->id ? "selected" : "")) }}>{{ $person->name }}</option>
+
+                        @endforeach
+
+                    </select>
+
+                    <div class="text-danger">{{ $errors->first('person_id') }}</div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Service:</label>
+
+                    <input type="text" disabled value="{{ $meeting->client->service->name }}" class="form-control" style="font-weight: 500; background-color: white;">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Lead Status:</label>
+
+                    <select class="form-control" name="lead_status_id">
+
+                        @foreach($leadStatuses as $leadStatus)
+
+                        <option value="{{ $leadStatus->id }}" {{ (old('lead_status_id') ? (old('lead_status_id') == $leadStatus->id ? "selected" : "") : ($leadStatus->id == $meeting->client->leadStatus->id ? "selected" : "")) }}>{{ $leadStatus->name }}</option>
+
+                        @endforeach
+
+                    </select>
+
+                    <div class="text-danger">{{ $errors->first('lead_status_id') }}</div>
+
+                </div>
+
+                <div class="form-group">
+
                     <label>Date:</label>
 
                     <input type="date" name="date" value="{{ old('date') ? old('date') : $meeting->date }}" class="form-control">

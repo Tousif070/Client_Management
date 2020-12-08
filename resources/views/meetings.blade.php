@@ -16,14 +16,14 @@
 
                     <tr>
                         <th>Sl. No.</th>
-                        <th>Title</th>
-                        <th>Agenda</th>
-                        <th>Client Name</th>
-                        <th>Assigned Person</th>
-                        <th>Service</th>
-                        <th>Lead Status</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Client Name</th>
+                        <th>Assigned Person</th>
+                        <th>Title</th>
+                        <th>Agenda</th>
+                        <th>Service</th>
+                        <th>Lead Status</th>
                         <th></th>
                     </tr>
 
@@ -35,14 +35,14 @@
 
                         <tr>
                             <td>{{ ++$serial }}</td>
-                            <td>{{ $meeting->title }}</td>
-                            <td>{{ $meeting->agenda }}</td>
-                            <td>{{ $meeting->client->name }}</td>
-                            <td>{{ $meeting->client->person->name }}</td>
-                            <td>{{ $meeting->client->service->name }}</td>
-                            <td>{{ $meeting->client->leadStatus->name }}</td>
                             <td>{{ date_format(date_create($meeting->date), 'M-d-Y') }}</td>
                             <td>{{ date_format(date_create($meeting->time), 'h:i A') }}</td>
+                            <td>{{ $meeting->client->name }}</td>
+                            <td>{{ $meeting->client->person->name }}</td>
+                            <td>{{ $meeting->title }}</td>
+                            <td>{{ $meeting->agenda }}</td>
+                            <td>{{ $meeting->client->service->name }}</td>
+                            <td>{{ $meeting->client->leadStatus->name }}</td>
 
                             <td>
 

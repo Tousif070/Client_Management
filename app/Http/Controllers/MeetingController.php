@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\MeetingFormRequest;
+use App\Http\Requests\MeetingEditFormRequest;
 
-use App\{Meeting, Client};
+use App\{Meeting, Client, Person, LeadStatus};
 
 class MeetingController extends Controller
 {
@@ -51,13 +52,31 @@ class MeetingController extends Controller
     {
         $meeting = Meeting::with('client')->find($meeting_id);
 
-        return view('editmeeting', compact('meeting'));
+        return view('editmeeting', [
+            'meeting' => $meeting,
+            'persons' => Person::all(),
+            'leadStatuses' => LeadStatus::all()
+        ]);
     }
 
-    public function editMeeting(Request $request, $meeting_id)
+    public function editMeeting(MeetingEditFormRequest $request, $meeting_id)
     {
-        return "HAHAHAHAHA";
+        $meeting = Meeting::find($meeting_id);
 
-        //return redirect()->back()->withStatus('Source Updated Successfully !');
+        $client = Client::find($meeting->client->id);
+
+        $meeting->title = $request->title;
+        $meeting->agenda = $request->agenda;
+        $meeting->date = $request->date;
+        $meeting->time = $request->time;
+
+        $client->person_id = $request->person_id;
+        $client->lead_status_id = $request->lead_status_id;
+
+        $meeting->save();
+
+        $client->save();
+
+        return redirect()->back()->withStatus('Meeting Updated Successfully !');
     }
 }
