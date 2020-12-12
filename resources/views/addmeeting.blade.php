@@ -36,26 +36,6 @@
 
                 <div class="form-group">
 
-                    <label>Title:</label>
-
-                    <input type="text" name="title" value="{{ old('title') }}" class="form-control">
-
-                    <div class="text-danger">{{ $errors->first('title') }}</div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Agenda:</label>
-
-                    <textarea name="agenda" class="form-control" rows="3">{{ old('agenda') }}</textarea>
-
-                    <div class="text-danger">{{ $errors->first('agenda') }}</div>
-
-                </div>
-
-                <div class="form-group">
-
                     <label>Client:</label>
 
                     <select class="form-control" name="client_id">
@@ -71,6 +51,26 @@
                     </select>
 
                     <div class="text-danger">{{ $errors->first('client_id') }}</div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Title:</label>
+
+                    <input type="text" name="title" value="{{ old('title') }}" class="form-control">
+
+                    <div class="text-danger">{{ $errors->first('title') }}</div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Agenda:</label>
+
+                    <textarea name="agenda" class="form-control" rows="3">{{ old('agenda') }}</textarea>
+
+                    <div class="text-danger">{{ $errors->first('agenda') }}</div>
 
                 </div>
 

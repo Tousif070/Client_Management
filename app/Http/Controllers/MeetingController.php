@@ -33,6 +33,7 @@ class MeetingController extends Controller
         $meeting->client_id = $request->client_id;
         $meeting->date = $request->date;
         $meeting->time = $request->time;
+        $meeting->status = "Pending";
 
         $meeting->save();
 

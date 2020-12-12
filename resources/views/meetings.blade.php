@@ -24,6 +24,7 @@
                         <th>Agenda</th>
                         <th>Service</th>
                         <th>Lead Status</th>
+                        <th>Meeting Status</th>
                         <th></th>
                     </tr>
 
@@ -43,6 +44,7 @@
                             <td>{{ $meeting->agenda }}</td>
                             <td>{{ $meeting->client->service->name }}</td>
                             <td>{{ $meeting->client->leadStatus->name }}</td>
+                            <td>{{ $meeting->status }}</td>
 
                             <td>
 

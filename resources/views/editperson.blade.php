@@ -42,6 +42,16 @@
 
                 </div>
 
+                <div class="form-group">
+
+                    <label>Email:</label>
+
+                    <input type="text" name="email" value="{{ old('email') ? old('email') : $person->email }}" class="form-control">
+
+                    <div class="text-danger">{{ $errors->first('email') }}</div>
+
+                </div>
+
                 <input type="submit" value="Save" class="btn btn-primary">
 
             </form>

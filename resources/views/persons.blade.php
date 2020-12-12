@@ -17,6 +17,7 @@
                     <tr>
                         <th>Sl. No.</th>
                         <th>Name</th>
+                        <th>Email</th>
                         <th></th>
                     </tr>
 
@@ -29,6 +30,7 @@
                         <tr>
                             <td>{{ ++$serial }}</td>
                             <td>{{ $person->name }}</td>
+                            <td>{{ $person->email }}</td>
 
                             <td>
 

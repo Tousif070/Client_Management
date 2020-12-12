@@ -36,7 +36,7 @@
 
                     <label>Name:</label>
 
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" value="{{ old('name') }}">
 
                     <div class="text-danger">{{ $errors->first('name') }}</div>
 

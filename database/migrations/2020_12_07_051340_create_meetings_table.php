@@ -27,6 +27,8 @@ class CreateMeetingsTable extends Migration
 
             $table->time('time');
 
+            $table->string('status');
+
             $table->timestamps();
         });
     }

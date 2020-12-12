@@ -18,7 +18,7 @@ class ClientFormRequest extends FormRequest
             'company_name' => 'nullable | min:3',
             'conversion_date' => 'required | date | date_format:Y-m-d',
 
-            'contact_number' => 'required | numeric',
+            'contact_number' => 'required | numeric | unique:clients,contact_number',
             'email' => 'email | nullable',
             'address' => 'nullable | min:5',
 
@@ -46,6 +46,7 @@ class ClientFormRequest extends FormRequest
 
             'contact_number.required' => 'Please enter a phone number.',
             'contact_number.numeric' => 'Only numbers are allowed.',
+            'contact_number.unique' => 'Please enter a unique phone number.',
 
             'email.email' => 'Please enter a valid email address.',
 

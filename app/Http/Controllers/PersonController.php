@@ -22,15 +22,19 @@ class PersonController extends Controller
     public function addPerson(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required | min:3'
+            'name' => 'required | min:3',
+            'email' => 'required | email'
         ], [
             'name.required' => 'Please enter a name.',
-            'name.min' => 'Name must contain at least 3 characters.'
+            'name.min' => 'Name must contain at least 3 characters.',
+            'email.required' => 'Please enter an email.',
+            'email.email' => 'Please enter a valid email.'
         ]);
 
         $person = new Person;
 
         $person->name = $request->name;
+        $person->email = $request->email;
 
         $person->save();
 
@@ -56,15 +60,19 @@ class PersonController extends Controller
     public function editPerson(Request $request, $person_id)
     {
         $this->validate($request, [
-            'name' => 'required | min:3'
+            'name' => 'required | min:3',
+            'email' => 'required | email'
         ], [
             'name.required' => 'Name can not be empty.',
-            'name.min' => 'Name must contain at least 3 characters.'
+            'name.min' => 'Name must contain at least 3 characters.',
+            'email.required' => 'Please enter an email.',
+            'email.email' => 'Please enter a valid email.'
         ]);
 
         $person = Person::find($person_id);
 
         $person->name = $request->name;
+        $person->email = $request->email;
 
         $person->save();
 
