@@ -27,7 +27,7 @@ class MeetingEditFormRequest extends FormRequest
             'title.required' => 'Please enter a title.',
             'title.min' => 'Title must contain at least 3 characters.',
 
-            'agenda.required' => 'Please enter give an agenda.',
+            'agenda.required' => 'Please give an agenda.',
             'agenda.min' => 'Agenda must contain at least 3 characters.',
 
             'date.required' => 'Please select a date.',

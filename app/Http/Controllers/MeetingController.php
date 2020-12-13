@@ -12,7 +12,7 @@ class MeetingController extends Controller
 {
     public function index()
     {
-        $meetings = Meeting::with('client')->get();
+        $meetings = Meeting::with('client')->orderBy('date')->get();
 
         return view('meetings', ['meetings' => $meetings, 'serial' => 0]);
     }
