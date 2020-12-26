@@ -32,9 +32,16 @@
 
                 @csrf
 
+                <div class="mb-3">
+                    <span style="color: crimson; font-size: 18px;">*</span> - Required
+                </div>
+
                 <div class="form-group">
 
-                    <label>Name:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Name:
+                    </label>
 
                     <input type="text" name="name" class="form-control" value="{{ old('name') }}">
 

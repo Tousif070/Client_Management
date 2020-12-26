@@ -34,9 +34,16 @@
 
                 @csrf
 
+                <div class="mb-3">
+                    <span style="color: crimson; font-size: 18px;">*</span> - Required
+                </div>
+
                 <div class="form-group">
 
-                    <label>Client:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Client:
+                    </label>
 
                     <select class="form-control" name="client_id">
 
@@ -56,7 +63,10 @@
 
                 <div class="form-group">
 
-                    <label>Title:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Title:
+                    </label>
 
                     <input type="text" name="title" value="{{ old('title') }}" class="form-control">
 
@@ -66,7 +76,10 @@
 
                 <div class="form-group">
 
-                    <label>Agenda:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Agenda:
+                    </label>
 
                     <textarea name="agenda" class="form-control" rows="3">{{ old('agenda') }}</textarea>
 
@@ -76,7 +89,10 @@
 
                 <div class="form-group">
 
-                    <label>Date:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Date:
+                    </label>
 
                     <input type="date" name="date" value="{{ old('date') }}" class="form-control">
 
@@ -86,7 +102,10 @@
 
                 <div class="form-group">
 
-                    <label>Time:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Time:
+                    </label>
 
                     <input type="time" name="time" value="{{ old('time') }}" class="form-control">
 

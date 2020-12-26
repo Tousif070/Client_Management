@@ -44,11 +44,51 @@
 
                 <div class="form-group">
 
+                    <label>Designation:</label>
+
+                    <input type="text" name="designation" value="{{ old('designation') ? old('designation') : $person->designation }}" class="form-control">
+
+                    <div class="text-danger">{{ $errors->first('designation') }}</div>
+
+                </div>
+    
+                <div class="form-group">
+
+                    <label>Phone Number (Mobile):</label>
+
+                    <input type="text" name="contact_number" value="{{ old('contact_number') ? old('contact_number') : $person->contact_number }}" class="form-control">
+
+                    <div class="text-danger">{{ $errors->first('contact_number') }}</div>
+
+                    @if(Session::has('error_contact_number'))
+
+                        <div class="text-danger">
+
+                            {{ Session::get('error_contact_number') }}
+
+                        </div>
+
+                    @endif
+
+                </div>
+
+                <div class="form-group">
+
                     <label>Email:</label>
 
                     <input type="text" name="email" value="{{ old('email') ? old('email') : $person->email }}" class="form-control">
 
                     <div class="text-danger">{{ $errors->first('email') }}</div>
+
+                    @if(Session::has('error_email'))
+
+                        <div class="text-danger">
+
+                            {{ Session::get('error_email') }}
+
+                        </div>
+
+                    @endif
 
                 </div>
 

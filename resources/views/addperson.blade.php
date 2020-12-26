@@ -32,9 +32,16 @@
 
                 @csrf
 
+                <div class="mb-3">
+                    <span style="color: crimson; font-size: 18px;">*</span> - Required
+                </div>
+
                 <div class="form-group">
 
-                    <label>Name:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Name:
+                    </label>
 
                     <input type="text" name="name" class="form-control" value="{{ old('name') }}">
 
@@ -44,7 +51,36 @@
 
                 <div class="form-group">
 
-                    <label>Email:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Designation:
+                    </label>
+
+                    <input type="text" name="designation" class="form-control" value="{{ old('designation') }}">
+
+                    <div class="text-danger">{{ $errors->first('designation') }}</div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Phone Number (Mobile):
+                    </label>
+
+                    <input type="text" name="contact_number" class="form-control" value="{{ old('contact_number') }}">
+
+                    <div class="text-danger">{{ $errors->first('contact_number') }}</div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Email:
+                    </label>
 
                     <input type="text" name="email" class="form-control" value="{{ old('email') }}">
 

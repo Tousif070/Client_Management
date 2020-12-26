@@ -34,9 +34,16 @@
 
                 @csrf
 
+                <div class="mb-3">
+                    <span style="color: crimson; font-size: 18px;">*</span> - Required
+                </div>
+
                 <div class="form-group">
 
-                    <label>Client Name:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Client Name:
+                    </label>
 
                     <input type="text" name="client_name" value="{{ old('client_name') }}" class="form-control">
 
@@ -56,7 +63,10 @@
 
                 <div class="form-group">
 
-                    <label>Conversion Date:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Conversion Date:
+                    </label>
 
                     <input type="date" name="conversion_date" value="{{ old('conversion_date') }}" class="form-control">
 
@@ -66,7 +76,10 @@
 
                 <div class="form-group">
 
-                    <label>Source:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Source:
+                    </label>
 
                     <select class="form-control" name="source_id">
 
@@ -86,7 +99,10 @@
 
                 <div class="form-group">
 
-                    <label>Assigned Person:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Assigned Person:
+                    </label>
 
                     <select class="form-control" name="assigned_person_id">
 
@@ -106,7 +122,10 @@
 
                 <div class="form-group">
 
-                    <label>Service Requirement:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Service Requirement:
+                    </label>
 
                     <select class="form-control" name="service_id">
 
@@ -126,7 +145,10 @@
 
                 <div class="form-group">
 
-                    <label>Phone Number (Mobile):</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Phone Number (Mobile):
+                    </label>
 
                     <input type="text" name="contact_number" value="{{ old('contact_number') }}" class="form-control">
 
@@ -156,7 +178,10 @@
 
                 <div class="form-group">
 
-                    <label>Lead Status:</label>
+                    <label>
+                        <span style="color: crimson; font-size: 18px;">*</span>
+                        Lead Status:
+                    </label>
 
                     <select class="form-control" name="lead_status_id">
 

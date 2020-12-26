@@ -19,7 +19,7 @@ class ClientFormRequest extends FormRequest
             'conversion_date' => 'required | date | date_format:Y-m-d',
 
             'contact_number' => 'required | numeric | unique:clients,contact_number',
-            'email' => 'email | nullable',
+            'email' => 'email | nullable | unique:clients,email',
             'address' => 'nullable | min:5',
 
             'comment_1' => 'nullable | min:3',
@@ -38,7 +38,7 @@ class ClientFormRequest extends FormRequest
             'client_name.required' => 'Please enter a name.',
             'client_name.min' => 'Name must contain at least 3 characters.',
 
-            'company_name' => 'Company name must contain at least 3 characters.',
+            'company_name.min' => 'Company name must contain at least 3 characters.',
 
             'conversion_date.required' => 'Please select a date.',
             'conversion_date.date' => 'Please select a valid date.',
@@ -49,6 +49,7 @@ class ClientFormRequest extends FormRequest
             'contact_number.unique' => 'Please enter a unique phone number.',
 
             'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'Please enter a unique email.',
 
             'address.min' => 'Address must contain at least 5 characters.',
 
