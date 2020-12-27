@@ -16,7 +16,7 @@ class MeetingFormRequest extends FormRequest
         return [
             'title' => 'required | min:3',
             'agenda' => 'required | min:3',
-            'client_id' => 'required',
+            'client_custom_id' => 'required',
             'date' => 'required | date',
             'time' => 'required'
         ];
@@ -31,7 +31,7 @@ class MeetingFormRequest extends FormRequest
             'agenda.required' => 'Please give an agenda.',
             'agenda.min' => 'Agenda must contain at least 3 characters.',
 
-            'client_id.required' => 'Please select a client.',
+            'client_custom_id.required' => 'Please enter the client ID.',
 
             'date.required' => 'Please select a date.',
             'date.date' => 'Please select a valid date.',

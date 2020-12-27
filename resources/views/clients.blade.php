@@ -22,6 +22,7 @@
 
                     <tr>
                         <th>Sl. No.</th>
+                        <th>ID</th>
                         <th>Client Name</th>
                         <th>Company Name</th>
                         <th>Conversion Date</th>
@@ -47,6 +48,8 @@
                         <tr>
 
                             <td>{{ ++$serial }}</td>
+
+                            <td>{{ $client->custom_id }}</td>
 
                             <td><input class="{{ $client->id }}" type="text" disabled name="client_name" value="{{ $client->name }}"></td>
 

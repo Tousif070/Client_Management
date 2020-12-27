@@ -30,7 +30,22 @@ class MeetingController extends Controller
 
         $meeting->title = $request->title;
         $meeting->agenda = $request->agenda;
-        $meeting->client_id = $request->client_id;
+
+        if($request->client_id != null)
+        {
+            $meeting->client_id = $request->client_id;
+        }
+        else
+        {
+            return redirect()->back()->with([
+                'error_client_custom_id' => 'Please enter a valid client ID',
+                'title' => $request->title,
+                'agenda' => $request->agenda,
+                'date' => $request->date,
+                'time' => $request->time
+            ]);
+        }
+
         $meeting->date = $request->date;
         $meeting->time = $request->time;
         $meeting->status = "Pending";
@@ -79,5 +94,29 @@ class MeetingController extends Controller
         $client->save();
 
         return redirect()->back()->withStatus('Meeting Updated Successfully !');
+    }
+
+
+
+
+    public function checkClient(Request $request)
+    {
+        $clients = Client::where('custom_id', '=', $request->custom_id)->get();
+
+        if(count($clients) == 1)
+        {
+            return [
+                'count' => 1,
+                'name' => $clients[0]['name'],
+                'id' => $clients[0]['id']
+            ];
+        }
+        else if(count($clients) == 0)
+        {
+            return [
+                'count' => 0,
+                'msg' => 'Invalid ID, Client not found'
+            ];
+        }
     }
 }

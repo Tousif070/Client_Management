@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/client/edit', 'ClientController@editClient');
+
+Route::post('/meeting/check', 'MeetingController@checkClient');

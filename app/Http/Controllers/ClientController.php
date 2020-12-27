@@ -11,6 +11,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ClientsExport;
 use App\Imports\ClientsImport;
 
+use Carbon\Carbon;
+
 class ClientController extends Controller
 {
     public function index()
@@ -41,6 +43,10 @@ class ClientController extends Controller
     {
         $client = new Client;
 
+        $today = Carbon::today('Asia/Dhaka');
+
+        $client->custom_id = "CL-".$today->day;
+
         $client->name = $request->client_name;
         $client->company_name = $request->company_name;
         $client->conversion_date = $request->conversion_date;
@@ -57,6 +63,10 @@ class ClientController extends Controller
         $client->person_id = $request->assigned_person_id;
         $client->lead_status_id = $request->lead_status_id;
         
+        $client->save();
+
+        $client->custom_id = $client->custom_id.$client->id;
+
         $client->save();
 
         return redirect()->back()->withStatus('Client Added Successfully !');

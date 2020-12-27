@@ -106,7 +106,7 @@
 
             ajax.open("POST", "http://127.0.0.1:8000/api/client/edit", true)
 
-            ajax.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+            ajax.setRequestHeader("content-type", "application/x-www-form-urlencoded")
 
             ajax.send(
                 "id="                     + data.id +
