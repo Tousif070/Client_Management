@@ -6,212 +6,302 @@
 
     <div class="container-fluid">
 
-        <div class="row">
+        <div class="row mb-2">
 
-            <h3 class="col-xl-10 mb-4">Clients</h3>
+            <div class="col-12">
 
-            <div class="col-xl-2 mb-4">
-
-                <a href="{{ route('clients.export') }}" class="btn btn-success">Download Client Data</a>
+                <h3>Clients</h3>
 
             </div>
 
-            <table class="table table-bordered table-sm ml-3">
+        </div>
 
-                <thead class="thead-dark">
+        <div class="row">
 
-                    <tr>
-                        <th>Sl. No.</th>
-                        <th>ID</th>
-                        <th>Client Name</th>
-                        <th>Company Name</th>
-                        <th>Conversion Date</th>
-                        <th>Source</th>
-                        <th>Assigned Person</th>
-                        <th>Service Requirement</th>
-                        <th>Contact Number</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Lead Status</th>
-                        <th>Comment-1</th>
-                        <th>Comment-2</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
+            <div class="col-12">
 
-                </thead>
+                <h4>View</h4>
 
-                <tbody>
+            </div>
 
-                    @foreach($clients as $client)
+        </div>
+
+        <div class="row mb-4 ml-2">
+
+            <div class="col-12">
+
+                <form name="filter_form" class="row" method="POST" action="{{ route('clients.filter') }}">
+
+                    @csrf
+
+                    <div class="col-1 mt-1 mb-2">
+                        <label><h5>From:</h5></label>
+                    </div>
+
+                    <div class="col-3">
+                        <input type="date" name="from_date" value="{{ isset($from_date) ? $from_date : "" }}" class="form-control">
+                    </div>
+
+                    <div class="col-1 mt-1">
+                        <label><h5>To:</h5></label>
+                    </div>
+
+                    <div class="col-3">
+                        <input type="date" name="to_date" value="{{ isset($to_date) ? $to_date : "" }}" class="form-control">
+                    </div>
+
+                    <div class="col-xl-2 mb-2">
+                        <input type="submit" value="Filter Client Data" class="btn btn-primary">
+                    </div>
+
+                    <div class="col-xl-2 mb-2">
+                        <input type="button" value="Download Client Data" onclick="download()" class="btn btn-success">
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+            {{-- <div class="col-xl-2 mb-4">
+
+                <a href="{{ route('clients.export') }}" class="btn btn-success">Download Client Data</a>
+
+            </div> --}}
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <table class="table table-bordered table-sm">
+
+                    <thead class="thead-dark">
 
                         <tr>
+                            <th>Sl. No.</th>
+                            <th>ID</th>
+                            <th>Client Name</th>
+                            <th>Company Name</th>
+                            <th>Conversion Date</th>
+                            <th>Source</th>
+                            <th>Assigned Person</th>
+                            <th>Service Requirement</th>
+                            <th>Contact Number</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Lead Status</th>
+                            <th>Comment-1</th>
+                            <th>Comment-2</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
 
-                            <td>{{ ++$serial }}</td>
+                    </thead>
 
-                            <td>{{ $client->custom_id }}</td>
+                    <tbody>
 
-                            <td><input class="{{ $client->id }}" type="text" disabled name="client_name" value="{{ $client->name }}"></td>
+                        @foreach($clients as $client)
 
-                            <td><input class="{{ $client->id }}" type="text" disabled name="company_name" value="{{ $client->company_name }}"></td>
+                            <tr>
 
-                            <td><input class="{{ $client->id }}" type="date" disabled name="conversion_date" value="{{ $client->conversion_date }}"></td>
+                                <td>{{ ++$serial }}</td>
 
-                            <td>
+                                <td>{{ $client->custom_id }}</td>
 
-                                <select class="{{ $client->id }}" disabled name="source_id">
+                                <td><input class="{{ $client->id }}" type="text" disabled name="client_name" value="{{ $client->name }}"></td>
 
-                                    @foreach($sources as $source)
+                                <td><input class="{{ $client->id }}" type="text" disabled name="company_name" value="{{ $client->company_name }}"></td>
 
-                                        @if($source->id == $client->source_id)
+                                <td><input class="{{ $client->id }}" type="date" disabled name="conversion_date" value="{{ $client->conversion_date }}"></td>
 
-                                            <option selected value="{{ $source->id }}">{{ $source->name }}</option>
+                                <td>
 
-                                        @else
+                                    <select class="{{ $client->id }}" disabled name="source_id">
 
-                                            <option value="{{ $source->id }}">{{ $source->name }}</option>
+                                        @foreach($sources as $source)
 
-                                        @endif
+                                            @if($source->id == $client->source_id)
 
-                                    @endforeach
+                                                <option selected value="{{ $source->id }}">{{ $source->name }}</option>
 
-                                </select>
+                                            @else
 
-                            </td>
+                                                <option value="{{ $source->id }}">{{ $source->name }}</option>
 
-                            <td>
+                                            @endif
 
-                                <select class="{{ $client->id }}" disabled name="assigned_person_id">
+                                        @endforeach
 
-                                    @foreach($persons as $person)
+                                    </select>
 
-                                        @if($person->id == $client->person_id)
+                                </td>
 
-                                            <option selected value="{{ $person->id }}">{{ $person->name }}</option>
+                                <td>
 
-                                        @else
+                                    <select class="{{ $client->id }}" disabled name="assigned_person_id">
 
-                                            <option value="{{ $person->id }}">{{ $person->name }}</option>
+                                        @foreach($persons as $person)
 
-                                        @endif
+                                            @if($person->id == $client->person_id)
 
-                                    @endforeach
+                                                <option selected value="{{ $person->id }}">{{ $person->name }}</option>
 
-                                </select>
+                                            @else
 
-                            </td>
+                                                <option value="{{ $person->id }}">{{ $person->name }}</option>
 
-                            <td>
+                                            @endif
 
-                                <select class="{{ $client->id }}" disabled name="service_id">
+                                        @endforeach
 
-                                    @foreach($services as $service)
+                                    </select>
 
-                                        @if($service->id == $client->service_id)
+                                </td>
 
-                                            <option selected value="{{ $service->id }}">{{ $service->name }}</option>
+                                <td>
 
-                                        @else
+                                    <select class="{{ $client->id }}" disabled name="service_id">
 
-                                            <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                        @foreach($services as $service)
 
-                                        @endif
+                                            @if($service->id == $client->service_id)
 
-                                    @endforeach
+                                                <option selected value="{{ $service->id }}">{{ $service->name }}</option>
 
-                                </select>
+                                            @else
 
-                            </td>
+                                                <option value="{{ $service->id }}">{{ $service->name }}</option>
 
-                            <td><input class="{{ $client->id }}" type="text" disabled name="contact_number" value="{{ $client->contact_number }}"></td>
+                                            @endif
 
-                            <td><input class="{{ $client->id }}" type="email" disabled name="email" value="{{ $client->email }}"></td>
+                                        @endforeach
 
-                            <td>
-                                <textarea class="{{ $client->id }}" disabled name="address" rows="3">{{ $client->address }}</textarea>
-                            </td>
+                                    </select>
 
-                            <td>
+                                </td>
 
-                                <select class="{{ $client->id }}" disabled name="lead_status_id">
+                                <td><input class="{{ $client->id }}" type="text" disabled name="contact_number" value="{{ $client->contact_number }}"></td>
 
-                                    @foreach($leadStatuses as $leadStatus)
+                                <td><input class="{{ $client->id }}" type="email" disabled name="email" value="{{ $client->email }}"></td>
 
-                                        @if($leadStatus->id == $client->lead_status_id)
+                                <td>
+                                    <textarea class="{{ $client->id }}" disabled name="address" rows="3">{{ $client->address }}</textarea>
+                                </td>
 
-                                            <option selected value="{{ $leadStatus->id }}">{{ $leadStatus->name }}</option>
+                                <td>
 
-                                        @else
+                                    <select class="{{ $client->id }}" disabled name="lead_status_id">
 
-                                            <option value="{{ $leadStatus->id }}">{{ $leadStatus->name }}</option>
+                                        @foreach($leadStatuses as $leadStatus)
 
-                                        @endif
+                                            @if($leadStatus->id == $client->lead_status_id)
 
-                                    @endforeach
+                                                <option selected value="{{ $leadStatus->id }}">{{ $leadStatus->name }}</option>
 
-                                </select>
+                                            @else
 
-                            </td>
+                                                <option value="{{ $leadStatus->id }}">{{ $leadStatus->name }}</option>
 
-                            <td>
-                                <textarea class="{{ $client->id }}" disabled name="comment_1" rows="3">{{ $client->comment_1 }}</textarea>
-                            </td>
+                                            @endif
 
-                            <td>
-                                <textarea class="{{ $client->id }}" disabled name="comment_2" rows="3">{{ $client->comment_2 }}</textarea>
-                            </td>
+                                        @endforeach
 
+                                    </select>
 
+                                </td>
 
+                                <td>
+                                    <textarea class="{{ $client->id }}" disabled name="comment_1" rows="3">{{ $client->comment_1 }}</textarea>
+                                </td>
 
-                            <td><button id="{{ $client->id }}" onclick="change(this.id)" class="btn btn-info" style="font-size: 14px">Edit</button></td>
+                                <td>
+                                    <textarea class="{{ $client->id }}" disabled name="comment_2" rows="3">{{ $client->comment_2 }}</textarea>
+                                </td>
 
 
 
 
-                            <td>
+                                <td><button id="{{ $client->id }}" onclick="change(this.id)" class="btn btn-info" style="font-size: 14px">Edit</button></td>
 
-                                <button class="btn btn-danger" data-toggle="modal" data-target="#client{{ $client->id }}" style="font-size: 14px;">Remove</button>
 
-                                <div class="modal fade" id="client{{ $client->id }}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Remove Client</h5>
-                                                <button type="button" class="close" data-dismiss="modal">
-                                                    <span>&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Are you sure ?</p>
-                                            </div>
-                                            <div class="modal-footer">
 
-                                                <form method="POST" action="{{ route('client.remove', $client->id) }}">
 
-                                                    @csrf
+                                <td>
 
-                                                    <input type="submit" class="btn btn-primary" value="Yes">
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#client{{ $client->id }}" style="font-size: 14px;">Remove</button>
 
-                                                </form>
+                                    <div class="modal fade" id="client{{ $client->id }}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Remove Client</h5>
+                                                    <button type="button" class="close" data-dismiss="modal">
+                                                        <span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure ?</p>
+                                                </div>
+                                                <div class="modal-footer">
 
+                                                    <form method="POST" action="{{ route('client.remove', $client->id) }}">
+
+                                                        @csrf
+
+                                                        <input type="submit" class="btn btn-primary" value="Yes">
+
+                                                    </form>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </td>
+                                </td>
 
-                        </tr>
+                            </tr>
 
-                    @endforeach
+                        @endforeach
 
-                </tbody>
+                    </tbody>
 
-            </table>
+                </table>
+
+            </div>
 
         </div>
 
     </div>
+
+    <script>
+
+        function download()
+        {
+            let date_range = {
+                from_date: document.forms['filter_form']['from_date'].value,
+                to_date: document.forms['filter_form']['to_date'].value
+            }
+
+            let ajax = new XMLHttpRequest()
+
+            ajax.onreadystatechange = function() {
+                if(ajax.readyState == 4 && ajax.status == 200)
+                {
+                    console.log(ajax.responseText)
+                }
+            }
+
+            ajax.open("POST", "http://127.0.0.1:8000/api/clients/export", true)
+
+            ajax.setRequestHeader("content-type", "application/x-www-form-urlencoded")
+
+            ajax.send(
+                "from_date=" + date_range.from_date +
+                "&to_date=" + date_range.to_date
+            )
+        }
+
+    </script>
 
 @endsection

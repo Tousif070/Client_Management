@@ -9,7 +9,9 @@ Route::get('/', 'ClientController@index')->name('clients');
 
 // FOR CLIENT
 
-Route::get('/clients', 'ClientController@index')->name('clients');
+Route::any('/clients', 'ClientController@index')->name('clients');
+
+Route::any('/clients/filter', 'ClientController@filterClients')->name('clients.filter');
 
 Route::get('/client/add', 'ClientController@addClientView')->name('client.add');
 
@@ -21,8 +23,6 @@ Route::post('/client/remove/{client_id}', 'ClientController@removeClient')->name
 Route::get('/clients/upload', 'ClientController@uploadClients')->name('clients.upload');
 
 Route::post('/clients/import', 'ClientController@import')->name('clients.import');
-
-Route::get('/clients/export', 'ClientController@export')->name('clients.export');
 
 
 

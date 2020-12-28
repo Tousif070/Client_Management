@@ -17,7 +17,7 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $clients = Client::with(['source', 'service', 'person', 'leadstatus'])->get();
+        $clients = Client::with(['source', 'service', 'person', 'leadstatus'])->orderBy('conversion_date')->get();
 
         return view('clients', [
             'clients' => $clients,
@@ -26,6 +26,26 @@ class ClientController extends Controller
             'services' => Service::all(),
             'persons' => Person::all(),
             'leadStatuses' => LeadStatus::all()
+        ]);
+    }
+
+    public function filterClients(Request $request)
+    {
+        $clients = Client::whereBetween('conversion_date', [$request->from_date, $request->to_date])
+                                ->with(['source', 'service', 'person', 'leadstatus'])
+                                ->orderBy('conversion_date')
+                                ->get();
+
+        return view('clients', [
+            'clients' => $clients,
+            'serial' => 0,
+            'sources' => Source::all(),
+            'services' => Service::all(),
+            'persons' => Person::all(),
+            'leadStatuses' => LeadStatus::all(),
+
+            'from_date' => $request->from_date,
+            'to_date' => $request->to_date
         ]);
     }
 
@@ -130,7 +150,7 @@ class ClientController extends Controller
         return redirect()->back()->withStatus('Excel File Uploaded Successfully !');
     }
 
-    public function export()
+    public function export(Request $request)
     {
         $fileName = "Clients.xlsx";
 
