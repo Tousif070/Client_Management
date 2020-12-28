@@ -8,6 +8,8 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
+use Carbon\Carbon;
+
 class ClientsImport implements ToCollection, WithHeadingRow, WithChunkReading
 {
     public $sources, $services, $persons, $leadStatuses;
@@ -25,6 +27,10 @@ class ClientsImport implements ToCollection, WithHeadingRow, WithChunkReading
         foreach($rows as $row)
         {
             $client = new Client;
+
+            $today = Carbon::today('Asia/Dhaka');
+
+            $client->custom_id = "CL-".$today->day;
 
             $client->name = $row['client_name'];
             $client->company_name = $row['company_name'];
@@ -70,6 +76,10 @@ class ClientsImport implements ToCollection, WithHeadingRow, WithChunkReading
                     break;
                 }
             }
+
+            $client->save();
+
+            $client->custom_id = $client->custom_id.$client->id;
 
             $client->save();
         }

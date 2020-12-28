@@ -38,6 +38,7 @@ class ClientsExport implements FromQuery, ShouldAutoSize, WithMapping, WithHeadi
 
         return [
             $this->serial,
+            $client->custom_id,
             $client->name,
             $client->company_name,
             $client->conversion_date,
@@ -57,6 +58,7 @@ class ClientsExport implements FromQuery, ShouldAutoSize, WithMapping, WithHeadi
     {
         return [
             'Sl. No.',
+            'ID',
             'Client Name',
             'Company Name',
             'Conversion Date',
@@ -87,7 +89,7 @@ class ClientsExport implements FromQuery, ShouldAutoSize, WithMapping, WithHeadi
     public function columnFormats(): array
     {
         return [
-            'D' => NumberFormat::FORMAT_DATE_YYYYMMDD
+            'E' => NumberFormat::FORMAT_DATE_YYYYMMDD
         ];
     }
 }
