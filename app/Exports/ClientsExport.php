@@ -18,16 +18,21 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class ClientsExport implements FromQuery, ShouldAutoSize, WithMapping, WithHeadings, WithStyles, WithColumnFormatting
 {
-    public $serial;
+    public $serial, $from_date, $to_date;
 
-    public function __construct()
+    public function __construct($from_date, $to_date)
     {
         $this->serial = 0;
+        $this->from_date = $from_date;
+        $this->to_date = $to_date;
     }
 
     public function query()
     {
-        $clients = Client::query()->with(['source', 'person', 'service', 'leadstatus']);
+        $clients = Client::query()
+                            ->whereBetween('conversion_date', [$this->from_date, $this->to_date])
+                            ->with(['source', 'person', 'service', 'leadstatus'])
+                            ->orderBy('conversion_date');
 
         return $clients;
     }

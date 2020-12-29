@@ -16,6 +16,7 @@
 
         </div>
 
+
         <div class="row">
 
             <div class="col-12">
@@ -26,37 +27,68 @@
 
         </div>
 
-        <div class="row mb-4 ml-2">
 
-            <div class="col-12">
+        <div class="row">
+
+            @if($errors->has('from_date') || $errors->has('to_date'))
+
+            <div class="col text-danger text-center mb-2">Please Fill Out The Date Ranges For Filtering !</div>
+
+            @endif
+
+        </div>
+
+
+        <div class="row">
+
+            <div id="error_date_range" class="col text-danger text-center mb-2" style="display: none;">Please Fill Out The Date Ranges For Downloading !</div>
+
+        </div>
+
+
+        <div class="row mb-2 ml-2">
+
+            <div class="col-10 mb-2">
 
                 <form name="filter_form" class="row" method="POST" action="{{ route('clients.filter') }}">
 
                     @csrf
 
-                    <div class="col-1 mt-1 mb-2">
+                    <div class="col-1 mt-1">
                         <label><h5>From:</h5></label>
                     </div>
 
-                    <div class="col-3">
-                        <input type="date" name="from_date" value="{{ isset($from_date) ? $from_date : "" }}" class="form-control">
+                    <div class="col-md-4">
+                        <input type="date" name="from_date" value="{{ isset($from_date) ? $from_date : old('from_date') }}" class="form-control">
                     </div>
 
-                    <div class="col-1 mt-1">
+                    <div class="col-md-1 mt-1">
                         <label><h5>To:</h5></label>
                     </div>
 
-                    <div class="col-3">
-                        <input type="date" name="to_date" value="{{ isset($to_date) ? $to_date : "" }}" class="form-control">
+                    <div class="col-md-4 mb-2">
+                        <input type="date" name="to_date" value="{{ isset($to_date) ? $to_date : old('to_date') }}" class="form-control">
                     </div>
 
-                    <div class="col-xl-2 mb-2">
+                    <div class="col-md-2">
                         <input type="submit" value="Filter Client Data" class="btn btn-primary">
                     </div>
 
-                    <div class="col-xl-2 mb-2">
-                        <input type="button" value="Download Client Data" onclick="download()" class="btn btn-success">
-                    </div>
+                </form>
+
+            </div>
+
+            <div class="col-xl-2">
+
+                <form name="download_form" onsubmit="return download()" method="POST" action="{{ route('clients.export') }}">
+
+                    @csrf
+
+                    <input type="hidden" name="from_date">
+
+                    <input type="hidden" name="to_date">
+
+                    <input type="submit" value="Download Client Data" class="btn btn-success">
 
                 </form>
 
@@ -64,11 +96,6 @@
 
         </div>
 
-            {{-- <div class="col-xl-2 mb-4">
-
-                <a href="{{ route('clients.export') }}" class="btn btn-success">Download Client Data</a>
-
-            </div> --}}
 
         <div class="row">
 
@@ -278,28 +305,28 @@
 
         function download()
         {
-            let date_range = {
-                from_date: document.forms['filter_form']['from_date'].value,
-                to_date: document.forms['filter_form']['to_date'].value
+            let from_date = document.forms['filter_form']['from_date'].value
+
+            let to_date = document.forms['filter_form']['to_date'].value
+
+            let error_date_range = document.getElementById("error_date_range")
+
+            if(from_date == "" || to_date == "")
+            {
+                error_date_range.style.display = "block"
+
+                return false
             }
+            else
+            {
+                error_date_range.style.display = "none"
 
-            let ajax = new XMLHttpRequest()
+                document.forms['download_form']['from_date'].value = from_date
 
-            ajax.onreadystatechange = function() {
-                if(ajax.readyState == 4 && ajax.status == 200)
-                {
-                    console.log(ajax.responseText)
-                }
+                document.forms['download_form']['to_date'].value = to_date
+
+                return true
             }
-
-            ajax.open("POST", "http://127.0.0.1:8000/api/clients/export", true)
-
-            ajax.setRequestHeader("content-type", "application/x-www-form-urlencoded")
-
-            ajax.send(
-                "from_date=" + date_range.from_date +
-                "&to_date=" + date_range.to_date
-            )
         }
 
     </script>

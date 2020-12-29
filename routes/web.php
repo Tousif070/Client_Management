@@ -24,6 +24,8 @@ Route::get('/clients/upload', 'ClientController@uploadClients')->name('clients.u
 
 Route::post('/clients/import', 'ClientController@import')->name('clients.import');
 
+Route::post('/clients/export', 'ClientController@export')->name('clients.export');
+
 
 
 

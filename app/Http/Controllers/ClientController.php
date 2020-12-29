@@ -31,6 +31,11 @@ class ClientController extends Controller
 
     public function filterClients(Request $request)
     {
+        $this->validate($request, [
+            'from_date' => 'required',
+            'to_date' => 'required'
+        ]);
+
         $clients = Client::whereBetween('conversion_date', [$request->from_date, $request->to_date])
                                 ->with(['source', 'service', 'person', 'leadstatus'])
                                 ->orderBy('conversion_date')
@@ -154,6 +159,6 @@ class ClientController extends Controller
     {
         $fileName = "Clients.xlsx";
 
-        return Excel::download(new ClientsExport, $fileName);
+        return Excel::download(new ClientsExport($request->from_date, $request->to_date), $fileName);
     }
 }
