@@ -101,6 +101,8 @@ Route::post('/leadstatus/edit/{lead_status_id}', 'LeadStatusController@editLeadS
 
 Route::get('/meetings', 'MeetingController@index')->name('meetings');
 
+Route::any('/meetings/filter', 'MeetingController@filterMeetings')->name('meetings.filter');
+
 Route::get('/meeting/add', 'MeetingController@addMeetingView')->name('meeting.add');
 
 Route::post('/meeting/add', 'MeetingController@addMeeting')->name('meeting.add.submit');

@@ -17,6 +17,48 @@ class MeetingController extends Controller
         return view('meetings', ['meetings' => $meetings, 'serial' => 0]);
     }
 
+    public function filterMeetings(Request $request)
+    {
+        $this->validate($request, [
+            'from_date' => 'required',
+            'to_date' => 'required',
+            'from_time' => 'required',
+            'to_time' => 'required',
+            'meeting_status' => 'required'
+        ]);
+
+        if($request->meeting_status == 1)
+        {
+            $meetings = Meeting::whereBetween('date', [$request->from_date, $request->to_date])
+                                ->whereBetween('time', [$request->from_time, $request->to_time])
+                                ->with('client')
+                                ->orderBy('date')
+                                ->orderBy('time')
+                                ->get();
+        }
+        else
+        {
+            $meetings = Meeting::whereBetween('date', [$request->from_date, $request->to_date])
+                                ->whereBetween('time', [$request->from_time, $request->to_time])
+                                ->where('status', '=', $request->meeting_status)
+                                ->with('client')
+                                ->orderBy('date')
+                                ->orderBy('time')
+                                ->get();
+        }
+
+        return view('meetings', [
+            'meetings' => $meetings,
+            'serial' => 0,
+
+            'from_date' => $request->from_date,
+            'to_date' => $request->to_date,
+            'from_time' => $request->from_time,
+            'to_time' => $request->to_time,
+            'meeting_status' => $request->meeting_status
+        ]);
+    }
+
     public function addMeetingView()
     {
         $clients = Client::all();
