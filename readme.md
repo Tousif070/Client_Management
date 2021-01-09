@@ -1,4 +1,5 @@
 # It is a basic CRM Software for managing Clients
+### It is an on-going project
 ### Current Features:
 * Adding and managing clients
 * Creating meetings with clients
