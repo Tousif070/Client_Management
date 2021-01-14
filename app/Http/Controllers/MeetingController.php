@@ -6,56 +6,131 @@ use Illuminate\Http\Request;
 use App\Http\Requests\MeetingFormRequest;
 use App\Http\Requests\MeetingEditFormRequest;
 
-use App\{Meeting, Client, Person, LeadStatus};
+use App\{Meeting, Client, Person, LeadStatus, Service};
+
+use Carbon\Carbon;
 
 class MeetingController extends Controller
 {
     public function index()
     {
+        $today = Carbon::today('Asia/Dhaka');
+        $pre_from_date = $today->subDays(7);
+
+        $today = Carbon::today('Asia/Dhaka');
+        $pre_to_date = $today->addDays(7);
+
         $meetings = Meeting::with('client')->orderBy('date')->orderBy('time')->get();
 
-        return view('meetings', ['meetings' => $meetings, 'serial' => 0]);
+        return view('meetings', [
+            'meetings' => $meetings,
+            'serial' => 0,
+
+            'lead_statuses' => LeadStatus::all(),
+            'services' => Service::all(),
+            'persons' => Person::all(),
+
+            'pre_from_date' => $pre_from_date->toDateString(),
+            'pre_to_date' => $pre_to_date->toDateString()
+        ]);
     }
 
     public function filterMeetings(Request $request)
     {
-        $this->validate($request, [
+        /* $this->validate($request, [
             'from_date' => 'required',
             'to_date' => 'required',
             'from_time' => 'required',
             'to_time' => 'required',
             'meeting_status' => 'required'
-        ]);
+        ]); */
 
-        if($request->meeting_status == 1)
-        {
-            $meetings = Meeting::whereBetween('date', [$request->from_date, $request->to_date])
+        $meeting_status_values = explode(", ", $request->meeting_status);
+
+        $meetings = Meeting::whereBetween('date', [$request->from_date, $request->to_date])
                                 ->whereBetween('time', [$request->from_time, $request->to_time])
+                                ->whereIn('status', $meeting_status_values)
                                 ->with('client')
                                 ->orderBy('date')
                                 ->orderBy('time')
                                 ->get();
+
+        $temp_meetings = array();
+
+        if($request->lead_status != 1)
+        {
+            foreach($meetings as $meeting)
+            {
+                if($meeting->client->leadStatus->name == $request->lead_status)
+                {
+                    $temp_meetings[] = $meeting;
+                }
+            }
+
+            $meetings = $temp_meetings;
+            $temp_meetings = [];
         }
-        else
+
+        if($request->service != 1)
         {
-            $meetings = Meeting::whereBetween('date', [$request->from_date, $request->to_date])
-                                ->whereBetween('time', [$request->from_time, $request->to_time])
-                                ->where('status', '=', $request->meeting_status)
-                                ->with('client')
-                                ->orderBy('date')
-                                ->orderBy('time')
-                                ->get();
+            foreach($meetings as $meeting)
+            {
+                if($meeting->client->service->name == $request->service)
+                {
+                    $temp_meetings[] = $meeting;
+                }
+            }
+
+            $meetings = $temp_meetings;
+            $temp_meetings = [];
+        }
+
+        if($request->assigned_person != 1)
+        {
+            foreach($meetings as $meeting)
+            {
+                if($meeting->client->person->name == $request->assigned_person)
+                {
+                    $temp_meetings[] = $meeting;
+                }
+            }
+
+            $meetings = $temp_meetings;
+            $temp_meetings = [];
+        }
+
+        if($request->client_id != "")
+        {
+            foreach($meetings as $meeting)
+            {
+                if($meeting->client->custom_id == $request->client_id)
+                {
+                    $temp_meetings[] = $meeting;
+                }
+            }
+
+            $meetings = $temp_meetings;
+            $temp_meetings = [];
         }
 
         return view('meetings', [
             'meetings' => $meetings,
             'serial' => 0,
 
+            'lead_statuses' => LeadStatus::all(),
+            'services' => Service::all(),
+            'persons' => Person::all(),
+
             'from_date' => $request->from_date,
             'to_date' => $request->to_date,
             'from_time' => $request->from_time,
             'to_time' => $request->to_time,
-            'meeting_status' => $request->meeting_status
+
+            'old_meeting_status' => $request->meeting_status,
+            'old_lead_status' => $request->lead_status,
+            'old_service' => $request->service,
+            'old_assigned_person' => $request->assigned_person,
+            'old_client_id' => $request->client_id
         ]);
     }
 
