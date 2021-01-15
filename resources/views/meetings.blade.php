@@ -17,6 +17,9 @@
         </div>
 
 
+        <hr>
+
+        
         <div class="row">
 
             <div class="col-12">
@@ -117,7 +120,7 @@
 
                     <select name="service" class="form-control">
 
-                        <option value="1" {{ (isset($old_service_status) ? ($old_service_status == "1" ? "selected" : "") : "selected") }}>All</option>
+                        <option value="1" {{ (isset($old_service) ? ($old_service == "1" ? "selected" : "") : "selected") }}>All</option>
 
                         @foreach($services as $service)
                             <option value="{{ $service->name }}" {{ (isset($old_service) ? ($old_service == $service->name ? "selected" : "") : "") }} >{{ $service->name }}</option>
@@ -176,6 +179,9 @@
             </div>
 
         </form>
+
+
+        <hr>
 
 
         <div class="row">

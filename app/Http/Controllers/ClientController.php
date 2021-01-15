@@ -17,40 +17,119 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $clients = Client::with(['source', 'service', 'person', 'leadstatus'])->orderBy('conversion_date')->get();
+        $today = Carbon::today('Asia/Dhaka');
+        $pre_from_date = $today->subDays(7);
+        $pre_from_date = $pre_from_date->toDateString();
+
+        $today = Carbon::today('Asia/Dhaka');
+        $pre_to_date = $today->addDays(7);
+        $pre_to_date = $pre_to_date->toDateString();
+
+        $clients = Client::whereBetween('conversion_date', [$pre_from_date, $pre_to_date])
+                            ->with(['source', 'service', 'person', 'leadstatus'])
+                            ->orderBy('conversion_date')
+                            ->get();
 
         return view('clients', [
             'clients' => $clients,
             'serial' => 0,
+
             'sources' => Source::all(),
             'services' => Service::all(),
             'persons' => Person::all(),
-            'leadStatuses' => LeadStatus::all()
+            'leadStatuses' => LeadStatus::all(),
+
+            'pre_from_date' => $pre_from_date,
+            'pre_to_date' => $pre_to_date
         ]);
     }
 
     public function filterClients(Request $request)
     {
-        $this->validate($request, [
+        /* $this->validate($request, [
             'from_date' => 'required',
             'to_date' => 'required'
-        ]);
+        ]); */
 
         $clients = Client::whereBetween('conversion_date', [$request->from_date, $request->to_date])
                                 ->with(['source', 'service', 'person', 'leadstatus'])
                                 ->orderBy('conversion_date')
                                 ->get();
 
+        $temp_clients = array();
+
+        if($request->lead_status != 1)
+        {
+            foreach($clients as $client)
+            {
+                if($client->leadStatus->name == $request->lead_status)
+                {
+                    $temp_clients[] = $client;
+                }
+            }
+
+            $clients = $temp_clients;
+            $temp_clients = [];
+        }
+
+        if($request->source != 1)
+        {
+            foreach($clients as $client)
+            {
+                if($client->source->name == $request->source)
+                {
+                    $temp_clients[] = $client;
+                }
+            }
+
+            $clients = $temp_clients;
+            $temp_clients = [];
+        }
+
+        if($request->service != 1)
+        {
+            foreach($clients as $client)
+            {
+                if($client->service->name == $request->service)
+                {
+                    $temp_clients[] = $client;
+                }
+            }
+
+            $clients = $temp_clients;
+            $temp_clients = [];
+        }
+
+        if($request->assigned_person != 1)
+        {
+            foreach($clients as $client)
+            {
+                if($client->person->name == $request->assigned_person)
+                {
+                    $temp_clients[] = $client;
+                }
+            }
+
+            $clients = $temp_clients;
+            $temp_clients = [];
+        }
+
         return view('clients', [
             'clients' => $clients,
             'serial' => 0,
+
             'sources' => Source::all(),
             'services' => Service::all(),
             'persons' => Person::all(),
             'leadStatuses' => LeadStatus::all(),
 
             'from_date' => $request->from_date,
-            'to_date' => $request->to_date
+            'to_date' => $request->to_date,
+
+            'old_lead_status' => $request->lead_status,
+            'old_source' => $request->source,
+            'old_service' => $request->service,
+            'old_assigned_person' => $request->assigned_person
         ]);
     }
 
@@ -77,7 +156,7 @@ class ClientController extends Controller
         $client->conversion_date = $request->conversion_date;
 
         $client->contact_number = $request->contact_number;
-        $client->email = $request->email;    
+        $client->email = $request->email;
         $client->address = $request->address;
 
         $client->comment_1 = $request->comment_1;
@@ -87,7 +166,7 @@ class ClientController extends Controller
         $client->service_id = $request->service_id;
         $client->person_id = $request->assigned_person_id;
         $client->lead_status_id = $request->lead_status_id;
-        
+
         $client->save();
 
         $client->custom_id = $client->custom_id.$client->id;
@@ -115,7 +194,7 @@ class ClientController extends Controller
         $client->conversion_date = $request->conversion_date;
 
         $client->contact_number = $request->contact_number;
-        $client->email = $request->email;    
+        $client->email = $request->email;
         $client->address = $request->address;
 
         $client->comment_1 = $request->comment_1;
@@ -157,8 +236,10 @@ class ClientController extends Controller
 
     public function export(Request $request)
     {
+        $criteria = explode(", ", $request->download_criteria);
+
         $fileName = "Clients.xlsx";
 
-        return Excel::download(new ClientsExport($request->from_date, $request->to_date), $fileName);
+        return Excel::download(new ClientsExport($criteria), $fileName);
     }
 }

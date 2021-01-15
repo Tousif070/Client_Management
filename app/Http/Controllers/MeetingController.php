@@ -16,11 +16,17 @@ class MeetingController extends Controller
     {
         $today = Carbon::today('Asia/Dhaka');
         $pre_from_date = $today->subDays(7);
+        $pre_from_date = $pre_from_date->toDateString();
 
         $today = Carbon::today('Asia/Dhaka');
         $pre_to_date = $today->addDays(7);
+        $pre_to_date = $pre_to_date->toDateString();
 
-        $meetings = Meeting::with('client')->orderBy('date')->orderBy('time')->get();
+        $meetings = Meeting::whereBetween('date', [$pre_from_date, $pre_to_date])
+                                ->with('client')
+                                ->orderBy('date')
+                                ->orderBy('time')
+                                ->get();
 
         return view('meetings', [
             'meetings' => $meetings,
@@ -30,8 +36,8 @@ class MeetingController extends Controller
             'services' => Service::all(),
             'persons' => Person::all(),
 
-            'pre_from_date' => $pre_from_date->toDateString(),
-            'pre_to_date' => $pre_to_date->toDateString()
+            'pre_from_date' => $pre_from_date,
+            'pre_to_date' => $pre_to_date
         ]);
     }
 
