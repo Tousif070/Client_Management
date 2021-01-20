@@ -18,12 +18,11 @@ class ClientController extends Controller
     public function index()
     {
         $today = Carbon::today('Asia/Dhaka');
-        $pre_from_date = $today->subDays(7);
+        $pre_from_date = $today->subDays(14);
         $pre_from_date = $pre_from_date->toDateString();
 
         $today = Carbon::today('Asia/Dhaka');
-        $pre_to_date = $today->addDays(7);
-        $pre_to_date = $pre_to_date->toDateString();
+        $pre_to_date = $today->toDateString();
 
         $clients = Client::whereBetween('conversion_date', [$pre_from_date, $pre_to_date])
                             ->with(['source', 'service', 'person', 'leadstatus'])
@@ -174,6 +173,39 @@ class ClientController extends Controller
         $client->save();
 
         return redirect()->back()->withStatus('Client Added Successfully !');
+    }
+
+    public function searchClientView()
+    {
+        return view('searchclient');
+    }
+
+    public function searchClient(Request $request)
+    {
+        $this->validate($request, [
+            'search_index' => 'required | alpha'
+        ], [
+            'search_index.required' => 'Please enter some keywords to find a match.'
+        ]);
+
+        $clients = Client::where('name', 'LIKE', $request->search_index."%")->get();
+
+        if(count($clients) > 0)
+        {
+            return view('searchclient', [
+                'clients' => $clients,
+                'serial' => 0,
+                'old_search_index' => $request->search_index,
+                'msg' => 'Match Found !'
+            ]);
+        }
+        else
+        {
+            return view('searchclient', [
+                'old_search_index' => $request->search_index,
+                'msg' => 'No Match Found !'
+            ]);
+        }
     }
 
     public function removeClient($client_id)

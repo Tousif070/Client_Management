@@ -13,6 +13,12 @@ Route::any('/clients', 'ClientController@index')->name('clients');
 
 Route::any('/clients/filter', 'ClientController@filterClients')->name('clients.filter');
 
+
+Route::get('/client/search', 'ClientController@searchClientView')->name('client.search');
+
+Route::post('/client/search', 'ClientController@searchClient')->name('client.search.submit');
+
+
 Route::get('/client/add', 'ClientController@addClientView')->name('client.add');
 
 Route::post('/client/add', 'ClientController@addClient')->name('client.add.submit');

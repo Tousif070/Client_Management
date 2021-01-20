@@ -14,6 +14,8 @@
 
                 <a class="dropdown-item" href="{{ route('clients') }}">Client List</a>
 
+                <a class="dropdown-item" href="{{ route('client.search') }}">Search Client</a>
+
                 <a class="dropdown-item" href="{{ route('client.add') }}">Add Client</a>
 
                 <a class="dropdown-item" href="{{ route('clients.upload') }}">Import Clients</a>
@@ -40,7 +42,7 @@
                 <a class="dropdown-item" href="{{ route('meeting.add') }}">Create Meeting</a>
 
             </div>
-            
+
         </li>
 
     </ul>
@@ -61,7 +63,7 @@
                 <a class="dropdown-item" href="{{ route('service.add') }}">Add Service</a>
 
             </div>
-            
+
         </li>
 
     </ul>
@@ -82,7 +84,7 @@
                 <a class="dropdown-item" href="{{ route('person.add') }}">Add Member</a>
 
             </div>
-            
+
         </li>
 
     </ul>
@@ -103,7 +105,7 @@
                 <a class="dropdown-item" href="{{ route('source.add') }}">Add Source</a>
 
             </div>
-            
+
         </li>
 
     </ul>
@@ -124,9 +126,9 @@
                 <a class="dropdown-item" href="{{ route('leadstatus.add') }}">Add Status</a>
 
             </div>
-            
+
         </li>
 
     </ul>
-    
+
 </nav>
