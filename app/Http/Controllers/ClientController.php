@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ClientFormRequest;
+use App\Http\Requests\ClientEditFormRequest;
 
 use App\{Client, Source, Service, Person, LeadStatus};
 
@@ -208,16 +209,23 @@ class ClientController extends Controller
         }
     }
 
-    public function removeClient($client_id)
+    public function removeClient($client_id, $type)
     {
         $client = Client::find($client_id);
 
         $client->delete();
 
-        return redirect()->back();
+        if($type == 1)
+        {
+            return redirect()->back();
+        }
+        else if($type == 2)
+        {
+            return redirect(route('client.search'));
+        }
     }
 
-    public function editClient(Request $request)
+    public function editClientAjax(Request $request)
     {
         $client = Client::find($request->id);
 
@@ -240,6 +248,70 @@ class ClientController extends Controller
         $client->save();
 
         return "Updated Successfully !";
+    }
+
+
+
+
+    public function editClientView($client_id)
+    {
+        $client = Client::find($client_id);
+
+        return view('editclient', [
+            'client' => $client,
+            'sources' => Source::all(),
+            'services' => Service::all(),
+            'persons' => Person::all(),
+            'leadStatuses' => LeadStatus::all()
+        ]);
+    }
+
+    public function editClient(ClientEditFormRequest $request, $client_id)
+    {
+        $client = Client::find($client_id);
+
+        $client->name = $request->client_name;
+        $client->company_name = $request->company_name;
+        $client->conversion_date = $request->conversion_date;
+
+
+        $client_contact_numbers = Client::where('contact_number', '=', $request->contact_number)->get();
+
+        if(count($client_contact_numbers) == 0)
+        {
+            $client->contact_number = $request->contact_number;
+        }
+        else if(count($client_contact_numbers) == 1 && $client_contact_numbers[0]['contact_number'] != $client->contact_number)
+        {
+            return redirect()->back()->with(['error_contact_number' => 'The phone number - '.$request->contact_number.' already exists.']);
+        }
+
+
+        $client_emails = Client::where('email', '=', $request->email)->get();
+
+        if(count($client_emails) == 0)
+        {
+            $client->email = $request->email;
+        }
+        else if(count($client_emails) == 1 && $client_emails[0]['email'] != $client->email)
+        {
+            return redirect()->back()->with(['error_email' => 'The email - '.$request->email.' already exists.']);
+        }
+
+
+        $client->address = $request->address;
+
+        $client->comment_1 = $request->comment_1;
+        $client->comment_2 = $request->comment_2;
+
+        $client->source_id = $request->source_id;
+        $client->service_id = $request->service_id;
+        $client->person_id = $request->assigned_person_id;
+        $client->lead_status_id = $request->lead_status_id;
+
+        $client->save();
+
+        return redirect()->back()->withStatus('Client Details Saved !');
     }
 
 

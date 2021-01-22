@@ -59,7 +59,7 @@ class PersonController extends Controller
         $person->name = $request->name;
         $person->designation = $request->designation;
 
-        $person_contact_numbers = Person::where('contact_number', 'LIKE', $request->contact_number)->get();
+        $person_contact_numbers = Person::where('contact_number', '=', $request->contact_number)->get();
 
         if(count($person_contact_numbers) == 0)
         {
@@ -71,7 +71,7 @@ class PersonController extends Controller
         }
 
 
-        $person_emails = Person::where('email', 'LIKE', $request->email)->get();
+        $person_emails = Person::where('email', '=', $request->email)->get();
 
         if(count($person_emails) == 0)
         {

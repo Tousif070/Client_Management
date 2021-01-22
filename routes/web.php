@@ -23,7 +23,13 @@ Route::get('/client/add', 'ClientController@addClientView')->name('client.add');
 
 Route::post('/client/add', 'ClientController@addClient')->name('client.add.submit');
 
-Route::post('/client/remove/{client_id}', 'ClientController@removeClient')->name('client.remove');
+
+Route::post('/client/remove/{client_id}/{type}', 'ClientController@removeClient')->name('client.remove');
+
+
+Route::get('/client/edit/{client_id}', 'ClientController@editClientView')->name('client.edit');
+
+Route::post('/client/edit/{client_id}', 'ClientController@editClient')->name('client.edit.submit');
 
 
 Route::get('/clients/upload', 'ClientController@uploadClients')->name('clients.upload');

@@ -373,7 +373,7 @@
                                                 </div>
                                                 <div class="modal-footer">
 
-                                                    <form method="POST" action="{{ route('client.remove', $client->id) }}">
+                                                    <form method="POST" action="{{ route('client.remove', [$client->id, 1]) }}">
 
                                                         @csrf
 

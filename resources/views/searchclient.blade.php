@@ -72,6 +72,7 @@
                         <th>Sl. No.</th>
                         <th>Client ID</th>
                         <th>Client Name</th>
+                        <th></th>
                     </tr>
 
                 </thead>
@@ -84,6 +85,9 @@
                         <td>{{ ++$serial }}</td>
                         <td>{{ $client->custom_id }}</td>
                         <td>{{ $client->name }}</td>
+                        <td>
+                            <a href="{{ route('client.edit', $client->id) }}" class="btn btn-info" style="font-size: 12px;">View</a>
+                        </td>
                     </tr>
 
                     @endforeach
