@@ -222,9 +222,9 @@ class MeetingController extends Controller
 
 
 
-    public function checkClient(Request $request)
+    public function checkClient($text)
     {
-        $clients = Client::where('custom_id', '=', $request->custom_id)->get();
+        $clients = Client::where('custom_id', '=', $text)->get();
 
         if(count($clients) == 1)
         {

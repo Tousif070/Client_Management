@@ -154,21 +154,34 @@
     </div>
 
 
+
+
+
+
+    <!-- JQUERY CDN -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
     <script>
 
         function search(text)
         {
-            let ajax = new XMLHttpRequest()
+            if(text == "")
+            {
+                return
+            }
 
-            ajax.onreadystatechange = function() {
-                if(ajax.readyState == 4 && ajax.status == 200)
+            let client_name = document.getElementById("client_name")
+
+            let client_id = document.getElementById("client_id")
+
+            let client_custom_id = document.getElementById("client_custom_id")
+
+            $.get("/meeting/check/" + text, function(obj, status) {
+
+                if(status == "success")
                 {
-                    let client_name = document.getElementById("client_name")
-                    let client_id = document.getElementById("client_id")
-                    let client_custom_id = document.getElementById("client_custom_id")
-
-                    let obj = JSON.parse(ajax.responseText);
-
                     if(obj.count == 1)
                     {
                         client_name.placeholder = obj.name
@@ -176,7 +189,7 @@
                     }
                     else if(obj.count == 0)
                     {
-                        client_id.value = "";
+                        client_id.value = ""
 
                         if(client_custom_id.value != "")
                         {
@@ -188,13 +201,9 @@
                         }
                     }
                 }
-            }
 
-            ajax.open("POST", "http://127.0.0.1:8000/api/meeting/check", true)
+            })
 
-            ajax.setRequestHeader("content-type", "application/x-www-form-urlencoded")
-
-            ajax.send("custom_id=" + text)
         }
 
     </script>

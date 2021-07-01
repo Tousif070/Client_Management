@@ -124,3 +124,5 @@ Route::post('/meeting/remove/{meeting_id}', 'MeetingController@removeMeeting')->
 Route::get('/meeting/edit/{meeting_id}', 'MeetingController@editMeetingView')->name('meeting.edit');
 
 Route::post('/meeting/edit/{meeting_id}', 'MeetingController@editMeeting')->name('meeting.edit.submit');
+
+Route::get('/meeting/check/{text}', 'MeetingController@checkClient');
